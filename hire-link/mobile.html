@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<title>Hire-Link 配車システム</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --color-primary: #8a6d3b;
+  --color-text: #534741;
+  --color-bg: #F7F6F5;
+  --color-accent: #B89B5E;
+  --color-border: #E8E0D4;
+  --color-gold: #b8945a;
+  --font-heading: 'Noto Serif JP', serif;
+  --font-body: 'Noto Sans JP', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.75;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Top bar */
+.top-bar {
+  position: sticky; top: 0; z-index: 1000;
+  background: rgba(255,255,255,0.97);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 1px 6px rgba(83,71,65,0.06);
+  padding: 10px 16px;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 48px;
+}
+.top-bar .brand {
+  font-family: var(--font-heading);
+  font-size: 16px; font-weight: 600;
+  color: var(--color-primary); letter-spacing: 0.5px;
+}
+.top-bar .cta-btn {
+  font-size: 12px; color: var(--color-gold);
+  border: 1px solid rgba(184,149,90,0.3);
+  padding: 5px 14px; border-radius: 4px; text-decoration: none;
+  letter-spacing: 0.5px;
+}
+
+/* Hero */
+.hero {
+  text-align: center; padding: 48px 16px 32px; position: relative;
+}
+.hero::after {
+  content: ''; display: block; width: 40px; height: 1px;
+  background: linear-gradient(to right, transparent, var(--color-gold), transparent);
+  margin: 20px auto 0;
+}
+.hero h1 {
+  font-family: var(--font-heading); font-weight: 600;
+  font-size: 1.35rem; color: var(--color-primary);
+  letter-spacing: 0.04em; margin-bottom: 8px;
+  line-height: 1.5;
+}
+.hero .tagline {
+  margin-top: 8px; font-size: 0.65rem; letter-spacing: 0.12em;
+  color: var(--color-accent); font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Container */
+.container {
+  max-width: 100%; margin: 0 auto; padding: 0 12px 40px;
+}
+
+/* Section divider */
+.section-divider {
+  text-align: center; margin: 40px 0 24px; position: relative;
+}
+.section-divider::before {
+  content: ''; display: block; width: 30px; height: 1px;
+  background: var(--color-gold); margin: 0 auto 12px; opacity: 0.4;
+}
+.section-divider .label {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.6rem; letter-spacing: 2px; color: var(--color-gold);
+  text-transform: uppercase; margin-bottom: 6px; display: block;
+}
+.section-divider h2 {
+  font-family: var(--font-heading); font-size: 1.15rem; font-weight: 600;
+  color: var(--color-primary); letter-spacing: 0.04em;
+}
+.section-divider .desc {
+  font-size: 0.7rem; color: #7a6f6a; margin-top: 8px;
+  font-style: italic;
+}
+
+/* Cards */
+.day-card {
+  background: #fff; border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 8px; margin-bottom: 16px; overflow: hidden;
+  box-shadow: 0 1px 4px rgba(83,71,65,0.04);
+}
+.day-card .day-header {
+  padding: 10px 14px; border-bottom: 1px solid rgba(0,0,0,0.05);
+  display: flex; align-items: baseline; gap: 8px; background: #faf8f5;
+}
+.day-card .day-header .day-num {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.65rem; letter-spacing: 2px;
+  color: var(--color-gold); font-weight: 400;
+}
+.day-card .day-header .day-route {
+  font-family: var(--font-heading); font-size: 0.82rem;
+  letter-spacing: 0.5px; color: var(--color-text); font-weight: 600;
+  line-height: 1.4;
+}
+.day-card .day-body { padding: 12px 14px; }
+.day-card .spot {
+  position: relative; padding-left: 14px; margin-bottom: 8px;
+  font-size: 0.76rem; letter-spacing: 0.3px; color: #4a4038; line-height: 1.7;
+}
+.day-card .spot::before {
+  content: "\2014"; position: absolute; left: 0; color: var(--color-gold); font-weight: 600;
+}
+.day-card .spot .tag {
+  display: inline-block; font-size: 0.55rem; letter-spacing: 0.5px;
+  color: var(--color-gold); border: 1px solid rgba(184,149,90,0.3);
+  padding: 1px 5px; margin-left: 3px; vertical-align: middle; border-radius: 2px;
+}
+.day-card .desc {
+  font-size: 0.7rem; letter-spacing: 0.2px; color: #8a7a6a;
+  padding-left: 14px; margin-bottom: 8px; font-style: italic; line-height: 1.6;
+}
+.day-card .hotel {
+  color: var(--color-gold); font-size: 0.7rem; letter-spacing: 1px;
+  padding-left: 14px; position: relative; margin-top: 4px;
+}
+.day-card .hotel::before {
+  content: "\25C7"; position: absolute; left: 0; font-size: 0.55rem;
+  color: #c8bda8; top: 2px;
+}
+
+/* CTA */
+.cta-section {
+  text-align: center; padding: 40px 16px;
+  border-top: 1px solid var(--color-border); background: #fff;
+}
+.cta-section h2 {
+  font-family: var(--font-heading); font-size: 1.15rem; font-weight: 600;
+  color: var(--color-primary); letter-spacing: 0.04em; margin-bottom: 8px;
+}
+.cta-section p {
+  font-size: 0.72rem; color: #7a6f6a; margin-bottom: 16px; letter-spacing: 0.3px;
+  font-style: italic;
+}
+.cta-section .btn {
+  display: inline-block; font-size: 0.72rem; letter-spacing: 0.5px;
+  color: var(--color-gold); border: 1px solid rgba(184,149,90,0.3);
+  padding: 8px 24px; border-radius: 4px; text-decoration: none;
+}
+
+/* Footer */
+.site-footer {
+  padding: 28px 16px; text-align: center;
+  border-top: 1px solid var(--color-border); background: var(--color-bg);
+}
+.site-footer .footer-tagline {
+  font-size: 0.85rem; color: var(--color-primary); letter-spacing: 0.08em; margin-bottom: 10px; font-style: italic;
+}
+.site-footer .footer-info { font-size: 0.65rem; color: #7a6f6a; line-height: 1.8; }
+.site-footer .footer-copy { font-size: 0.6rem; color: #aaa; margin-top: 10px; }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="brand">Hire-Link</div>
+  <a href="#cta" class="cta-btn">お問い合わせ</a>
+</div>
+
+<div class="hero">
+  <h1>ハイヤー配車を、<br>ひとつにつなぐ</h1>
+  <div class="tagline">Hire-Link</div>
+</div>
+
+<div class="container">
+
+  <!-- ===== 特長 ===== -->
+  <div id="features">
+    <div class="section-divider">
+      <span class="label">FEATURES</span>
+      <h2>システムの特長</h2>
+      <div class="desc">配車業務にかかるすべての工程を、ひとつのシステムで</div>
+    </div>
+
+    <!-- 01 -->
+    <div class="day-card">
+      <div class="day-header">
+        <span class="day-num">01</span>
+        <span class="day-route">配車情報の三者間同期</span>
+      </div>
+      <div class="day-body">
+        <div class="spot">営業所・注文元（エージェント）・ドライバーの三者間で情報をリアルタイムに同期 <span class="tag">PC・スマホ連携</span></div>
+        <div class="desc">注文元はパソコンで確認画面（閲覧のみ）。ドライバーはスマホで確認。営業所は一元管理。</div>
+        <div class="spot">配車依頼の修正が瞬時に三者へ伝達 <span class="tag">三者チェック</span></div>
+        <div class="desc">修正内容がすぐに伝わるため、情報のズレによるミスを防止。</div>
+        <div class="spot">ドライバーが運行開始をタップすると、注文元へ自動でメール送信</div>
+        <div class="desc">スマホで「運行開始」をタップするだけで、開始通知メールが自動送信される。</div>
+        <div class="hotel">三者の透明な情報同期</div>
+      </div>
+    </div>
+
+    <!-- 02 -->
+    <div class="day-card">
+      <div class="day-header">
+        <span class="day-num">02</span>
+        <span class="day-route">ひと目で分かる配車画面</span>
+      </div>
+      <div class="day-body">
+        <div class="spot">注文を利用時間に応じて24時間のタイムライン上に表示 <span class="tag">一目で把握</span></div>
+        <div class="desc">どの車両にいつ予約が入っているかがひと目で分かる。</div>
+        <div class="spot">タイムラインに配車に必要な情報を直接表示 <span class="tag">詳細不要</span></div>
+        <div class="desc">詳細画面を開かなくても配車の判断ができる。</div>
+        <div class="spot">英語対応ドライバー・ミートサービスを自動表示 <span class="tag">漏れ防止</span></div>
+        <div class="spot">自由記入メモ欄で備忘録対応</div>
+        <div class="spot">上下ドラッグでドライバーへ配車、左右はロックして誤操作を防止 <span class="tag">誤操作防止</span></div>
+        <div class="spot">配車完了車両は色が変化、当日の使用状況が一目瞭然 <span class="tag">色別管理</span></div>
+        <div class="spot">未配車案件プールで仮配車、確定後にワンクリックで配車 <span class="tag">仮配車機能</span></div>
+        <div class="hotel">ひとつの画面で全情報を把握</div>
+      </div>
+    </div>
+
+    <!-- 03 -->
+    <div class="day-card">
+      <div class="day-header">
+        <span class="day-num">03</span>
+        <span class="day-route">グループ単位の案件管理</span>
+      </div>
+      <div class="day-body">
+        <div class="spot">まずグループを作成し、その中に複数の配車注文を登録 <span class="tag">科学的な管理</span></div>
+        <div class="spot">複数日にわたる注文はタイムライン上で同じ識別で表示 <span class="tag">連動表示</span></div>
+        <div class="spot">複数日にわたる注文に毎日異なるドライバーを配置可能 <span class="tag">柔軟な配置</span></div>
+        <div class="desc">ドライバーは関連行程表を確認でき、現場でのお客様への対応も安心。</div>
+        <div class="spot">グループ内の注文をクリックすると連動表示 <span class="tag">連動表示</span></div>
+        <div class="spot">ワンクリックで複数車両分の請求明細を自動生成 <span class="tag">ワンクリック生成</span></div>
+        <div class="hotel">効率的で科学的な案件管理</div>
+      </div>
+    </div>
+
+    <!-- 04 -->
+    <div class="day-card">
+      <div class="day-header">
+        <span class="day-num">04</span>
+        <span class="day-route">柔軟な各種設定</span>
+      </div>
+      <div class="day-body">
+        <div class="spot">会社の出庫拠点を設定</div>
+        <div class="spot">車両管理台帳の管理</div>
+        <div class="spot">ドライバー情報の管理</div>
+        <div class="spot">空港お迎え料金・プラン価格・言語指定料金・車種指定料金を自由に設定 <span class="tag">柔軟な価格体系</span></div>
+        <div class="desc">それぞれのドライバーへの配分率も柔軟にカスタマイズ可能。</div>
+        <div class="hotel">現場に合わせた自由な設定</div>
+      </div>
+    </div>
+
+    <!-- 05 -->
+    <div class="day-card">
+      <div class="day-header">
+        <span class="day-num">05</span>
+        <span class="day-route">ドライバー業務をワンシステムで完結</span>
+      </div>
+      <div class="day-body">
+        <div class="spot">出勤・出庫・出発・乗車・降車・到着・帰庫・退勤を順番通りに操作 <span class="tag">8ステップ</span></div>
+        <div class="desc">ボタンが順番通りに現れるため、直感的に操作できる。</div>
+        <div class="spot">勤務時間管理・運行日報・車両点検・注文情報・乗降報告——すべて完結 <span class="tag">ワンシステム</span></div>
+        <div class="spot">毎日のキロ数入力で車両管理台帳へ自動同期 <span class="tag">キロ数自動更新</span></div>
+        <div class="spot">勤務時間と時間外手当を自動計算、Excel出力 <span class="tag">自動計算</span></div>
+        <div class="hotel">複数システムを行き来する必要なし</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 各関係者との連携 ===== -->
+  <div id="relations">
+    <div class="section-divider">
+      <span class="label">CONNECTIONS</span>
+      <h2>各関係者との連携</h2>
+      <div class="desc">注文元・協力会社・ドライバー、シームレスに連携</div>
+    </div>
+
+    <!-- 注文元 -->
+    <div class="day-card">
+      <div class="day-header">
+        <span class="day-num">▸</span>
+        <span class="day-route">注文元（エージェント）との連携</span>
+      </div>
+      <div class="day-body">
+        <div class="spot">注文元専用の確認画面を提供 <span class="tag">閲覧のみ</span></div>
+        <div class="desc">情報がドライバー・営業所とリアルタイムに同期。</div>
+        <div class="spot">ドライバーの乗車・降車メッセージが自動でメール送信 <span class="tag">複数メール設定可</span></div>
+        <div class="hotel">注文元は常に最新状況を把握</div>
+      </div>
+    </div>
+
+    <!-- 協力会社 -->
+    <div class="day-card">
+      <div class="day-header">
+        <span class="day-num">▸</span>
+        <span class="day-route">協力会社との連携</span>
+      </div>
+      <div class="day-body">
+        <div class="spot">専用の協力会社エリアで全社を一覧管理 <span class="tag">一元管理</span></div>
+        <div class="spot">会社名クリックで関連注文のタイムラインがハイライト表示</div>
+        <div class="spot">ワンクリックでテキストコピー・リンク共有・PDF運行指示書を生成 <span class="tag">3種類の共有方法</span></div>
+        <div class="spot">各協力会社に対応する明細管理ページ <span class="tag">精算管理</span></div>
+        <div class="spot">ワンクリックでExcel出力、精算時の比較がスムーズ <span class="tag">Excel出力</span></div>
+        <div class="hotel">他社との連携がスムーズで正確</div>
+      </div>
+    </div>
+
+    <!-- ドライバー -->
+    <div class="day-card">
+      <div class="day-header">
+        <span class="day-num">▸</span>
+        <span class="day-route">ドライバーとの連携</span>
+      </div>
+      <div class="day-body">
+        <div class="spot">すべての注文をスマホで確認 <span class="tag">スマホ完結</span></div>
+        <div class="spot">ドライバーが見られる日数を設定可能 <span class="tag">日数制限</span></div>
+        <div class="spot">スマホで休暇申請可能、承認後は配車画面から自動で外す <span class="tag">自動連携</span></div>
+        <div class="spot">毎日のキロ数入力で車両管理台帳も自動更新 <span class="tag">キロ数同期</span></div>
+        <div class="spot">勤務時間と時間外手当を自動計算、Excel出力 <span class="tag">自動計算</span></div>
+        <div class="spot">高速料金・駐車料金などの立替費用をスマホで入力 <span class="tag">紙不要</span></div>
+        <div class="desc">入力されたデータは営業所へリアルタイムで同期され、透明かつ正確に管理できる。</div>
+        <div class="hotel">ドライバーの負担を最小限に</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== スマホ対応 ===== -->
+  <div id="mobile">
+    <div class="section-divider">
+      <span class="label">MOBILE</span>
+      <h2>スマホで全工程を完了</h2>
+      <div class="desc">外出時や休日の緊急対応時もパソコン不要</div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header">
+        <span class="day-num">▸</span>
+        <span class="day-route">スマートフォンで全機能に対応</span>
+      </div>
+      <div class="day-body">
+        <div class="spot">外出中や休日の緊急時でも、パソコンを持ち出す必要はありません</div>
+        <div class="spot">スマートフォンから配車画面にアクセスし、その場で対応可能</div>
+        <div class="spot">ドライバーはスマホ1台ですべての注文を確認</div>
+        <div class="hotel">いつでもどこでも配車業務に対応</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- CTA -->
+<section class="cta-section" id="cta">
+  <h2>配車業務のDXを、今すぐ</h2>
+  <p>三者間の情報同期から精算まで――すべてをひとつに</p>
+  <a href="#" class="btn">お問い合わせ・無料相談</a>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-tagline">Hire-Link</div>
+  <div class="footer-info">
+    配車業務のDXプラットフォーム
+  </div>
+  <div class="footer-copy">© 2026 Hire-Link. All rights reserved.</div>
+</footer>
+
+</body>
+</html>
