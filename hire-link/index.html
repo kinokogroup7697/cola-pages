@@ -72,6 +72,10 @@ body {
   font-size: 1.8rem; color: var(--color-primary);
   letter-spacing: 0.06em; margin-bottom: 12px;
 }
+.hero .tagline {
+  margin-top: 16px; font-size: 0.75rem; letter-spacing: 0.15em;
+  color: var(--color-accent); font-family: 'Helvetica Neue', Arial, sans-serif;
+}
 
 /* Container */
 .container {
@@ -196,7 +200,8 @@ body {
 </div>
 
 <div class="hero">
-  <h1>Hire-Link 配車システム</h1>
+  <h1>ハイヤーの配車をひとつに繋ぐ</h1>
+  <div class="tagline">Hire-Link</div>
 </div>
 
 <div class="container">
@@ -216,12 +221,12 @@ body {
         <span class="day-route">配車情報の三者間同期</span>
       </div>
       <div class="day-body">
-        <div class="spot">営業所・依頼元（エージェント）・ドライバーの情報をリアルタイムに同期 <span class="tag">PC・スマホ連携</span></div>
-        <div class="desc">依頼元（エージェント）はパソコン端末で専用の確認画面を持ち、閲覧のみ可能。ドライバーはスマホ端末で確認（閲覧のみ）。営業所はパソコン端末で配車依頼の入力・修正・管理を行う。</div>
+        <div class="spot">営業所・注文元（エージェント）・ドライバーの三者間で情報をリアルタイムに同期 <span class="tag">PC・スマホ連携</span></div>
+        <div class="desc">注文元（エージェント）はパソコン端末で専用の確認画面を持ち、閲覧のみ可能。ドライバーはスマホ端末で確認（閲覧のみ）。営業所はパソコン端末で配車依頼の入力・修正・管理を行う。</div>
         <div class="spot">配車依頼の修正が瞬時に三者へ伝達 <span class="tag">三者チェック</span></div>
-        <div class="desc">修正内容がすぐに依頼元とドライバーに伝わるため、情報のズレによるミスを防止。三者が同時に同じ情報を確認できる。</div>
-        <div class="spot">ドライバーが運行開始をクリックすると、依頼元（エージェント）へ自動でメール送信</div>
-        <div class="desc">ドライバーがスマホで配車依頼の「開始」をタップするだけで、依頼元へ開始通知のメールが自動的に送信される。手動での報告は不要。</div>
+        <div class="desc">修正内容がすぐに注文元とドライバーに伝わるため、情報のズレによるミスを防止。三者が同時に同じ情報を確認できる。</div>
+        <div class="spot">ドライバーが運行開始をタップすると、注文元（エージェント）へ自動でメール送信</div>
+        <div class="desc">ドライバーがスマホで「運行開始」をタップするだけで、注文元へ開始通知のメールが自動的に送信される。手動での報告は不要。</div>
         <div class="hotel">三者の透明な情報同期 — 同じ情報を同時に共有することで、ミスをなくし、信頼を生む</div>
       </div>
     </div>
@@ -233,17 +238,17 @@ body {
         <span class="day-route">グループ単位の案件管理</span>
       </div>
       <div class="day-body">
-        <div class="spot">まずグループ案件を作成し、その中に複数の配車依頼を作成 <span class="tag">科学的な管理</span></div>
-        <div class="desc">新規配車依頼の際、まず1つのグループとして案件を作成する。そのグループの中に複数台の配車依頼を作成することで、管理がより科学化・効率化される。</div>
-        <div class="spot">複数日にわたる配車依頼は関連案件として時間軸に同じ識別情報で表示 <span class="tag">連動表示</span></div>
-        <div class="desc">複数日にまたがる配車依頼は、時間軸上で同じ識別情報（色やマーク）で表示され、関連していることがひと目でわかる。</div>
-        <div class="spot">複数日にわたる配車依頼の時間軸に、プルダウンで予定情報を表示</div>
-        <div class="desc">複数日にわたる配車依頼は、時間軸上でプルダウン形式で各日の予定情報を確認できる。</div>
-        <div class="spot">複数日にわたる配車依頼に毎日異なるドライバーを配置可能 <span class="tag">柔軟な配置</span></div>
+        <div class="spot">まずグループを作成し、その中に複数の配車注文を登録 <span class="tag">科学的な管理</span></div>
+        <div class="desc">新規注文の際、まず1つのグループを作成する。そのグループの中に複数台の配車注文を登録することで、管理がより科学化・効率化される。</div>
+        <div class="spot">複数日にわたる注文は、関連案件としてタイムライン上で同じ識別で表示 <span class="tag">連動表示</span></div>
+        <div class="desc">複数日にまたがる注文は、タイムライン上で同じ識別（色やマーク）で表示され、関連していることがひと目でわかる。</div>
+        <div class="spot">複数日にわたる注文は、タイムライン上でプルダウン形式により予定情報を表示</div>
+        <div class="desc">複数日にわたる注文は、タイムライン上でプルダウン形式で各日の予定情報を確認できる。</div>
+        <div class="spot">複数日にわたる注文に毎日異なるドライバーを配置可能 <span class="tag">柔軟な配置</span></div>
         <div class="desc">ドライバーは自分の関連行程表（他の日の同じグループの配車）を確認できる。現場でお客様から質問された際にも即座に回答でき、お客様に安心感を提供できる。</div>
-        <div class="spot">1つのグループ内の複数車両の配車依頼は、時間軸上でクリックすると連鎖反応 <span class="tag">連鎖表示</span></div>
-        <div class="desc">グループ内のひとつの配車依頼をクリックすると、同じグループの他の配車依頼も連動してハイライトされる。</div>
-        <div class="spot">1つのグループの配車案件から、ワンクリックで複数車両の請求明細を自動生成 <span class="tag">ワンクリック生成</span></div>
+        <div class="spot">1つのグループ内の複数車両の注文は、タイムライン上でクリックすると連動表示 <span class="tag">連動表示</span></div>
+        <div class="desc">グループ内のひとつの注文をクリックすると、同じグループの他の注文も連動してハイライトされる。</div>
+        <div class="spot">1つのグループの配車案件から、ワンクリックで複数車両分の請求明細を自動生成 <span class="tag">ワンクリック生成</span></div>
         <div class="hotel">効率的で科学的な案件管理 — グループ単位でまとめることで、ミスを減らし、作業を大幅に効率化</div>
       </div>
     </div>
@@ -252,25 +257,25 @@ body {
     <div class="day-card">
       <div class="day-header">
         <span class="day-num">03</span>
-        <span class="day-route">一目で分かる配車画面</span>
+        <span class="day-route">ひと目で分かる配車画面</span>
       </div>
       <div class="day-body">
-        <div class="spot">配車依頼を運行時間の長さで24h時間軸に表示 <span class="tag">一目で把握</span></div>
-        <div class="desc">すべての配車依頼が24時間のタイムライン上に、運行時間の長さに応じて表示される。どの車両にいつ配車依頼が入っているかがひと目でわかる。</div>
+        <div class="spot">注文を利用時間に応じて24時間のタイムライン上に表示 <span class="tag">一目で把握</span></div>
+        <div class="desc">すべての注文が24時間のタイムライン上に、利用時間に応じて表示される。どの車両にいつ予約が入っているかがひと目で分かる。</div>
         <div class="spot">タイムラインに配車に必要な情報を直接表示 <span class="tag">詳細不要</span></div>
         <div class="desc">配車に必要な情報（顧客名、行程表、時間など）がタイムライン上に直接表示されるため、いちいち詳細画面を開かなくても配車の判断ができる。</div>
-        <div class="spot">英語ドライバー・ミートサービスを自動表示 <span class="tag">漏れ防止</span></div>
-        <div class="desc">英語対応のドライバーや、空港でのミートサービスが必要な配車依頼は、タイムライン上に自動的に表示される。うっかり忘れを防ぐ。</div>
+        <div class="spot">英語対応ドライバー・ミートサービスを自動表示 <span class="tag">漏れ防止</span></div>
+        <div class="desc">英語対応のドライバーや、空港でのミートサービスが必要な注文は、タイムライン上に自動的に表示される。うっかり忘れを防ぐ。</div>
         <div class="spot">自由記入メモ欄で備忘録対応</div>
         <div class="desc">タイムライン上に自由にメモを記入でき、配車時の注意事項や備忘録として使える。</div>
-        <div class="spot">上下ドラッグでドライバーに配車、左右はロックで誤操作防止 <span class="tag">誤操作防止</span></div>
-        <div class="desc">タイムライン上で配車依頼を上下にドラッグするとドライバーに配車できる。左右へのドラッグはできないため、従業員が誤って予約情報を変更してしまう事故を防止。</div>
+        <div class="spot">上下ドラッグでドライバーへ配車、左右はロックして誤操作を防止 <span class="tag">誤操作防止</span></div>
+        <div class="desc">タイムライン上で注文を上下にドラッグするとドライバーに配車できる。左右へのドラッグはできないため、従業員が誤って予約情報を変更してしまう事故を防止。</div>
         <div class="spot">タイムライン上部に全車両を表示、配車完了車両は色が変化 <span class="tag">色別管理</span></div>
         <div class="desc">タイムラインの上部にすべての車両が並び、配車が完了した車両は色が変わる（緑色など）。当日の車両使用状況が一目瞭然。</div>
-        <div class="spot">未配車案件一覧で仮配車 <span class="tag">仮配車機能</span></div>
-        <div class="desc">未配車の案件は専用の一覧に集まり、まず仮配車として仮押さえ可能。確定後にワンクリックで複数の配車依頼をドライバーに配車できる。</div>
-        <div class="spot">情報不足の配車依頼も未確定案件一覧に一時保管可能</div>
-        <div class="desc">まだ詳細情報が揃っていない配車依頼でも、一旦一覧に入れておくことができ、情報が揃い次第配車に回せる。</div>
+        <div class="spot">未配車案件プールで仮配車 <span class="tag">仮配車機能</span></div>
+        <div class="desc">未配車の案件は専用のプールに集まり、まず仮配車として登録可能。確定後にワンクリックで複数の注文をドライバーへ配車できる。</div>
+        <div class="spot">情報不足の注文も未確定案件プールに一時保管可能</div>
+        <div class="desc">まだ詳細情報が揃っていない注文でも、一旦プールに入れておくことができ、情報が揃い次第配車に回せる。</div>
         <div class="hotel">ひとつの画面で全情報を把握 — 詳細を開かなくても配車でき、漏れも防げる</div>
       </div>
     </div>
@@ -279,17 +284,17 @@ body {
     <div class="day-card">
       <div class="day-header">
         <span class="day-num">04</span>
-        <span class="day-route">柔軟なカスタマイズ設定</span>
+        <span class="day-route">柔軟な各種設定</span>
       </div>
       <div class="day-body">
-        <div class="spot">会社の出庫位置を設定</div>
+        <div class="spot">会社の出庫拠点を設定</div>
         <div class="desc">自社の車両が出庫する拠点を自由に設定可能。</div>
         <div class="spot">車両管理台帳の管理</div>
         <div class="desc">所有するすべての車両の情報を管理台帳として管理。キロ数の自動更新にも連携。</div>
         <div class="spot">ドライバー情報の管理</div>
         <div class="desc">ドライバーの基本情報、資格、勤務状況などを一元管理。</div>
-        <div class="spot">空港お迎え料金・プラン価格・言語指定価格・車両指定価格を自由に設定 <span class="tag">柔軟な価格体系</span></div>
-        <div class="desc">空港お迎えの料金、プラン別の価格、英語など言語指定の追加価格、車種指定の追加価格など、あらゆる価格パターンを自由に設定できる。</div>
+        <div class="spot">空港お迎え料金・プラン価格・言語指定料金・車種指定料金を自由に設定 <span class="tag">柔軟な価格体系</span></div>
+        <div class="desc">空港お迎えの料金、プラン別の価格、英語など言語指定の追加料金、車種指定の追加料金など、あらゆる価格パターンを自由に設定できる。</div>
         <div class="spot">それぞれの価格に対するドライバーへの配分率も柔軟にカスタマイズ可能 <span class="tag">配分も自由</span></div>
         <div class="desc">設定した各価格について、ドライバーにどの割合で配分するかも細かく設定可能。価格ごとに異なる配分率を設定できる。</div>
         <div class="hotel">現場に合わせた自由な設定 — 業態や現場に合わせて、すべてを自由にカスタマイズ</div>
@@ -300,16 +305,16 @@ body {
     <div class="day-card">
       <div class="day-header">
         <span class="day-num">05</span>
-        <span class="day-route">ドライバー業務の一元化</span>
+        <span class="day-route">ドライバー業務をワンシステムで完結</span>
       </div>
       <div class="day-body">
         <div class="spot">出勤・出庫・出発・乗車・降車・到着・帰庫・退勤を順番通りに操作 <span class="tag">8ステップ</span></div>
-        <div class="desc">ドライバーは配車依頼を見ながら、出勤→出庫→出発→乗車→降車→到着→帰庫→退勤の8つのステップを順番通りにタップしていく。ボタンが順番通りに現れるため、操作がシンプルで受容度が高い。</div>
-        <div class="spot">勤務時間管理・運行日報・車両点検・配車依頼情報・お客様への乗降報告——すべて同一システムで完結 <span class="tag">ワンシステム</span></div>
+        <div class="desc">ドライバーは注文を見ながら、出勤→出庫→出発→乗車→降車→到着→帰庫→退勤の8つのステップを順番通りにタップしていく。ボタンが順番通りに現れるため、直感的に操作できる。</div>
+        <div class="spot">勤務時間管理・運行日報・車両点検・注文情報・お客様への乗降報告——すべて同一システムで完結 <span class="tag">ワンシステム</span></div>
         <div class="desc">複数のシステムを行き来する必要がない。ドライバーが操作するのはすべてこの配車システムの中で完結する。しかも必要なボタンが順番に現れるため、迷うことがない。</div>
         <div class="spot">毎日の開始・終了キロ数を入力、車両管理台帳へ自動同期 <span class="tag">キロ数自動更新</span></div>
         <div class="desc">ドライバーが毎日スマホで開始時と終了時のキロ数を入力するだけで、車両管理台帳に自動的に反映される。わざわざ車を開けて各車両のキロ数を確認する必要がない。</div>
-        <div class="spot">勤務時間と時間外手当を自動計算、Excel生成 <span class="tag">自動計算</span></div>
+        <div class="spot">勤務時間と時間外手当を自動計算、Excel出力 <span class="tag">自動計算</span></div>
         <div class="desc">ドライバーの勤務時間と時間外手当は自動で計算され、Excelとして出力される。給与計算の手間が大幅に削減される。</div>
         <div class="hotel">複数システムを行き来する必要なし — ドライバーの負担を最小限に、作業効率を最大化</div>
       </div>
@@ -321,21 +326,21 @@ body {
     <div class="section-divider">
       <span class="label">CONNECTIONS</span>
       <h2>各関係者との連携</h2>
-      <div class="desc">依頼元・協力会社・ドライバー、シームレスに連携</div>
+      <div class="desc">注文元・協力会社・ドライバー、シームレスに連携</div>
     </div>
 
-    <!-- 依頼元 -->
+    <!-- 注文元 -->
     <div class="day-card">
       <div class="day-header">
         <span class="day-num">▸</span>
-        <span class="day-route">依頼元（エージェント）との連携</span>
+        <span class="day-route">注文元（エージェント）との連携</span>
       </div>
       <div class="day-body">
-        <div class="spot">各顧客専用の確認ページを提供 <span class="tag">閲覧のみ</span></div>
-        <div class="desc">各顧客専用の確認ページを提供。情報がドライバー・配車会社営業所とリアルタイムに同期されており、常に最新の配車依頼状況を確認できる（閲覧のみで変更不可）。</div>
+        <div class="spot">注文元専用の確認画面を提供 <span class="tag">閲覧のみ</span></div>
+        <div class="desc">各注文元には専用の確認ページを提供。情報がドライバー・営業所とリアルタイムに同期されており、常に最新の注文状況を確認できる（閲覧のみで変更不可）。</div>
         <div class="spot">ドライバーの乗車・降車メッセージが自動でメール送信 <span class="tag">複数メールアドレス設定可</span></div>
-        <div class="desc">ドライバーがスマホで「乗車」「降車」をタップすると、自動で顧客へメールが送信される。通知先のメールアドレスは複数設定可能で、複数の担当者に同時に通知できる。</div>
-        <div class="hotel">顧客は常に最新状況を把握 — 現場の状況がリアルタイムで手元に届く</div>
+        <div class="desc">ドライバーがスマホで「乗車」「降車」をタップすると、自動で注文元へメールが送信される。通知先のメールアドレスは複数設定可能で、複数の担当者に同時に通知できる。</div>
+        <div class="hotel">注文元は常に最新状況を把握 — 現場の状況がリアルタイムで手元に届く</div>
       </div>
     </div>
 
@@ -346,15 +351,15 @@ body {
         <span class="day-route">協力会社との連携</span>
       </div>
       <div class="day-body">
-        <div class="spot">専門の協力会社エリアで全社を一覧管理 <span class="tag">一元管理</span></div>
-        <div class="desc">すべての協力会社が同じエリアに集まっており、一覧で確認可能。各社の配車依頼状況がひと目でわかる。</div>
-        <div class="spot">会社名をクリックすると、関連配車依頼の時間軸がハイライト表示</div>
-        <div class="desc">ある協力会社の名前をクリックすると、その会社に関連する配車依頼が時間軸上でハイライト（点滅など）で表示され、どの配車依頼がその会社に関連しているかがすぐにわかる。</div>
-        <div class="spot">配車依頼ページからワンクリックでテキストコピー・リンク共有・PDF配車指示書を生成 <span class="tag">3つの共有方法</span></div>
-        <div class="desc">配車依頼ページでワンクリック操作するだけで、テキスト情報をコピーするか、共有リンクを生成するか、PDFの配車指示書を作成するかを選択できる。他社に予約情報を迅速に共有可能。</div>
-        <div class="spot">各協力会社ごとの明細管理ページ <span class="tag">精算管理</span></div>
+        <div class="spot">専用の協力会社エリアで全社を一覧管理 <span class="tag">一元管理</span></div>
+        <div class="desc">すべての協力会社が同じエリアに集まっており、一覧で確認可能。各社の注文状況がひと目でわかる。</div>
+        <div class="spot">会社名をクリックすると、関連注文のタイムラインがハイライト表示</div>
+        <div class="desc">ある協力会社の名前をクリックすると、その会社に関連する注文がタイムライン上でハイライト（点滅など）で表示され、どの注文がその会社に関連しているかがすぐにわかる。</div>
+        <div class="spot">注文ページからワンクリックでテキストコピー・リンク共有・PDF運行指示書を生成 <span class="tag">3種類の共有方法</span></div>
+        <div class="desc">注文ページでワンクリック操作するだけで、テキスト情報をコピーするか、共有リンクを生成するか、PDFの運行指示書を作成するかを選択できる。他社に予約情報を迅速に共有可能。</div>
+        <div class="spot">各協力会社に対応する明細管理ページ <span class="tag">精算管理</span></div>
         <div class="desc">各協力会社ごとに専用の明細管理ページがあり、その会社との取引明細を一元管理できる。</div>
-        <div class="spot">ワンクリックでExcel出力、精算時の他社との比較がスムーズ <span class="tag">Excel出力</span></div>
+        <div class="spot">ワンクリックでExcelを出力、精算時の他社との比較がスムーズ <span class="tag">Excel出力</span></div>
         <div class="desc">明細ページからワンクリックでExcelを出力可能。精算時に他社の明細と比較する際、データが揃っているためスムーズに処理できる。</div>
         <div class="hotel">他社との連携がスムーズで正確 — 情報の共有から精算まで、もっとも手間のかかる部分を自動化</div>
       </div>
@@ -367,18 +372,18 @@ body {
         <span class="day-route">ドライバーとの連携</span>
       </div>
       <div class="day-body">
-        <div class="spot">すべての配車依頼をスマホで確認 <span class="tag">スマホ完結</span></div>
-        <div class="desc">ドライバーのすべての配車依頼がスマホ端末で確認できる。パソコンは不要。</div>
+        <div class="spot">すべての注文をスマホで確認 <span class="tag">スマホ完結</span></div>
+        <div class="desc">ドライバーのすべての注文がスマホ端末で確認できる。パソコンは不要。</div>
         <div class="spot">ドライバーが見られる日数を設定可能 <span class="tag">日数制限</span></div>
-        <div class="desc">ドライバーがスマホで確認できる日数を設定でき、必要以上に未来の配車依頼を見せないよう制御可能。</div>
+        <div class="desc">ドライバーがスマホで確認できる日数を設定でき、必要以上に未来の注文を見せないよう制御可能。</div>
         <div class="spot">スマホで休暇申請可能、承認後は配車画面から自動で外す <span class="tag">自動連携</span></div>
         <div class="desc">ドライバーがスマホで休暇申請をすると、管理者が承認した時点で自動的にそのドライバーが配車画面から外される。手動で配車を調整する必要がない。</div>
         <div class="spot">毎日のキロ数入力で車両管理台帳も自動更新 <span class="tag">キロ数同期</span></div>
         <div class="desc">ドライバーが毎日スマホで開始時・終了時のキロ数を入力するだけで、車両管理台帳に自動的に反映される。わざわざ車を開けて各車両のキロ数を確認する必要がない。</div>
-        <div class="spot">勤務時間と時間外手当を自動計算、Excel生成 <span class="tag">自動計算</span></div>
+        <div class="spot">勤務時間と時間外手当を自動計算、Excel出力 <span class="tag">自動計算</span></div>
         <div class="desc">ドライバーの勤務時間と時間外手当は自動で計算され、Excelとして出力される。</div>
-        <div class="spot">高速代・駐車代の立替費用をスマホで入力 <span class="tag">紙不要</span></div>
-        <div class="desc">ドライバーが現場で立て替えた高速代や駐車代を、スマホ端末から直接入力。紙の領収書や報告書は不要。入力されたデータは営業所へリアルタイムで同期され、透明かつ正確に管理できる。</div>
+        <div class="spot">高速料金・駐車料金などの立替費用をスマホで入力 <span class="tag">紙不要</span></div>
+        <div class="desc">ドライバーが現場で立て替えた高速料金や駐車料金を、スマホ端末から直接入力。紙の領収書や報告書は不要。入力されたデータは営業所へリアルタイムで同期され、透明かつ正確に管理できる。</div>
         <div class="hotel">ドライバーの負担を最小限に — 申請からキロ数管理、立替費用、給与計算まで自動化</div>
       </div>
     </div>
@@ -395,12 +400,12 @@ body {
     <div class="day-card">
       <div class="day-header">
         <span class="day-num">▸</span>
-        <span class="day-route">スマホ完全対応</span>
+        <span class="day-route">スマートフォンで全機能に対応</span>
       </div>
       <div class="day-body">
-        <div class="spot">外出時や休日の緊急対応時にパソコンを持ち出す必要なし</div>
-        <div class="spot">スマホから配車画面にアクセスしてその場で対応</div>
-        <div class="spot">ドライバーはスマホ1台ですべての配車依頼を確認</div>
+        <div class="spot">外出中や休日の緊急時でも、パソコンを持ち出す必要はありません</div>
+        <div class="spot">スマートフォンから配車画面にアクセスし、その場で対応可能</div>
+        <div class="spot">ドライバーはスマホ1台ですべての注文を確認</div>
         <div class="hotel">いつでもどこでも配車業務に対応</div>
       </div>
     </div>
@@ -410,8 +415,8 @@ body {
 
 <!-- CTA -->
 <section class="cta-section" id="cta">
-  <h2>配車業務のDXを今すぐ</h2>
-  <p>三者の情報同期から精算まで——すべてをひとつに</p>
+  <h2>配車業務のDXを、今すぐ</h2>
+  <p>三者間の情報同期から精算まで――すべてをひとつに</p>
   <a href="#" class="btn">お問い合わせ・無料相談</a>
 </section>
 
