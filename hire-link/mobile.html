@@ -35,14 +35,15 @@ body {
 
 /* Top bar */
 .top-bar {
-  position: sticky; top: 0; z-index: 1000;
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
   background: rgba(255,255,255,0.97);
   backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
   box-shadow: 0 1px 6px rgba(83,71,65,0.06);
   padding: 10px 16px;
-  display: flex; align-items: center; justify-content: space-between;
+  display: flex; align-items: center;
   height: 48px;
 }
+.top-bar-spacer { height: 48px; }
 .top-bar .brand {
   font-family: var(--font-heading);
   font-size: 16px; font-weight: 600;
@@ -184,6 +185,7 @@ body {
 <div class="top-bar">
   <div class="brand">Hire-Link</div>
 </div>
+<div class="top-bar-spacer"></div>
 
 <div class="hero">
   <h1>ハイヤー配車を、ひとつにつなぐ</h1>
