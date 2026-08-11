@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kimono Selection | KINOKO CLUB CONCIERGE</title>
+  <style>
+    :root { --ink:#18201d; --muted:#68716c; --paper:#f7f7f3; --line:#dfe3dd; --accent:#a64b38; --soft:#ebe9df; }
+    * { box-sizing:border-box; } body { margin:0; color:var(--ink); background:var(--paper); font-family: Arial, Helvetica, sans-serif; }
+    header { border-bottom:1px solid var(--line); background:#fff; }
+    .top { max-width:1320px; margin:auto; padding:24px 32px 20px; display:flex; justify-content:space-between; align-items:flex-start; gap:20px; }
+    .brand { letter-spacing:.16em; font-size:12px; font-weight:700; }
+    .brand span { display:block; margin-top:8px; color:var(--muted); letter-spacing:.08em; font-size:11px; font-weight:400; }
+    .eyebrow { color:var(--accent); text-transform:uppercase; letter-spacing:.16em; font-size:11px; font-weight:700; }
+    h1 { margin:7px 0 0; font-family: Georgia, serif; font-weight:400; font-size:clamp(34px,5vw,64px); line-height:.98; }
+    .intro { max-width:1320px; padding:0 32px 28px; margin:auto; display:flex; justify-content:space-between; align-items:end; gap:30px; }
+    .intro p { color:var(--muted); max-width:540px; line-height:1.6; margin:0; font-size:14px; }
+    .count { font-size:13px; color:var(--muted); white-space:nowrap; }
+    main { max-width:1320px; margin:auto; padding:28px 32px 70px; }
+    .toolbar { display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--line); padding-bottom:18px; margin-bottom:24px; gap:18px; }
+    .collections { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px; }
+    .collection { border:1px solid var(--line); background:#fff; color:var(--muted); padding:12px 16px; text-align:left; min-width:145px; }
+    .collection strong { display:block; color:var(--ink); font:400 18px Georgia,serif; }
+    .collection span { display:block; font-size:10px; margin-top:4px; }
+    .collection.active, .collection:hover { border-color:var(--accent); }
+    .collection.active strong, .collection:hover strong { color:var(--accent); }
+    .filters { display:flex; gap:8px; flex-wrap:wrap; }
+    button { font:inherit; cursor:pointer; }
+    .filter { border:1px solid var(--line); background:transparent; color:var(--muted); padding:9px 16px; border-radius:2px; font-size:12px; letter-spacing:.06em; text-align:left; }
+    .filter span { display:block; font-size:10px; opacity:.75; letter-spacing:.02em; margin-top:4px; }
+    .filter.active span, .filter:hover span { opacity:.9; }
+    .filter.active, .filter:hover { color:#fff; border-color:var(--ink); background:var(--ink); }
+    .selection { display:flex; align-items:center; gap:15px; font-size:13px; }
+    .selection strong { font-size:20px; font-family:Georgia,serif; font-weight:400; }
+    .clear { border:0; background:transparent; color:var(--accent); text-decoration:underline; font-size:12px; }
+    .grid { display:grid; grid-template-columns:repeat(4,1fr); gap:22px 14px; }
+    .item { min-width:0; position:relative; }
+    .photo { position:relative; aspect-ratio: .78; background:#e6e6df; overflow:hidden; }
+    .photo img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .35s; }
+    .item:hover img { transform:scale(1.025); }
+    .choose { position:absolute; inset:auto 12px 12px 12px; border:0; padding:12px; background:rgba(255,255,255,.94); color:var(--ink); font-size:12px; letter-spacing:.08em; text-transform:uppercase; opacity:0; transition:opacity .2s; }
+    .item:hover .choose, .item.selected .choose { opacity:1; }
+    .item.selected .choose { background:var(--ink); color:#fff; }
+    .meta { display:flex; justify-content:space-between; align-items:center; padding-top:10px; font-size:12px; }
+    .meta small { color:var(--muted); }
+    .size { border:1px solid var(--line); padding:4px 7px; font-size:10px; letter-spacing:.12em; }
+    .empty { grid-column:1/-1; padding:60px 0; text-align:center; color:var(--muted); }
+    .note { margin-top:42px; border-top:1px solid var(--line); padding-top:18px; color:var(--muted); font-size:12px; line-height:1.6; }
+    .share { margin-top:28px; padding:22px; border:1px solid var(--line); background:#fff; display:flex; justify-content:space-between; align-items:center; gap:18px; }
+    .floating-share { position:fixed; z-index:20; right:24px; bottom:24px; display:flex; align-items:center; gap:14px; padding:10px 12px 10px 16px; background:var(--ink); color:#fff; box-shadow:0 10px 28px rgba(24,32,29,.2); }
+    .floating-share span { font-size:12px; white-space:nowrap; }
+    .floating-share button { border:1px solid rgba(255,255,255,.55); background:#fff; color:var(--ink); padding:10px 13px; font-size:11px; white-space:nowrap; }
+    .floating-share button:disabled { opacity:.55; cursor:not-allowed; }
+    .share p { margin:4px 0 0; color:var(--muted); font-size:12px; }
+    .share button { border:0; background:var(--ink); color:#fff; padding:12px 18px; font-size:12px; letter-spacing:.05em; white-space:nowrap; }
+    .share button:disabled { background:#bfc4bf; cursor:not-allowed; }
+    footer { background:var(--ink); color:#fff; padding:42px 32px; }
+    .footer-inner { max-width:1320px; margin:auto; display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:30px; }
+    footer h2 { font:400 25px Georgia,serif; margin:0 0 12px; }
+    footer p, footer a { color:#c8cfca; font-size:12px; line-height:1.7; margin:0; text-decoration:none; }
+    .footer-label { color:#fff; font-size:11px; letter-spacing:.12em; margin-bottom:10px; }
+    @media (max-width:800px) { .share { align-items:flex-start; flex-direction:column; } .footer-inner { grid-template-columns:1fr; } footer { padding-left:18px; padding-right:18px; } .floating-share { right:10px; left:10px; bottom:10px; justify-content:space-between; } .floating-share button { flex:1; } .floating-share span { font-size:11px; } main { padding-bottom:92px; } }
+    @media (max-width:800px) { .top,.intro,main { padding-left:18px; padding-right:18px; } .top,.intro { flex-direction:column; align-items:flex-start; } .intro { gap:14px; } .grid { grid-template-columns:repeat(2,1fr); gap:20px 10px; } .toolbar { align-items:flex-start; flex-direction:column; } }
+    @media (max-width:420px) { .grid { grid-template-columns:repeat(2,1fr); } h1 { font-size:38px; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="top"><div class="brand">KINOKO CLUB CONCIERGE<span>Private Japan experiences</span></div><div class="eyebrow">Guest wardrobe selection</div></div>
+    <div class="intro"><div><h1>Choose your kimono</h1><p>Browse our curated wardrobe and select the pieces you would like to try during your experience. Please choose by size.</p></div><div class="count" id="shownCount"></div></div>
+  </header>
+  <main>
+    <div class="collections" role="group" aria-label="Choose a collection"><button class="collection active" data-collection="standard"><strong>Standard</strong><span>Everyday kimono</span></button><button class="collection" data-collection="high"><strong>High Grade</strong><span>Premium selection</span></button><button class="collection" data-collection="summer"><strong>Summer Limit</strong><span>June–September · lighter materials</span></button></div>
+    <div class="toolbar"><div class="filters" role="group" aria-label="Filter by size"><button class="filter active" data-size="ALL">All sizes</button><button class="filter" data-size="S">S<span>150–160 cm</span></button><button class="filter" data-size="M">M<span>160–165 cm</span></button><button class="filter" data-size="L">L<span>165+ cm</span></button></div><div class="selection"><span>Selected</span><strong id="selectedCount">0</strong><button class="clear" id="clear">Clear</button></div></div>
+    <section class="grid" id="grid" aria-live="polite"></section>
+    <div class="share"><div><div class="footer-label">SEND YOUR SELECTION</div><p>Share your preferred pieces with our staff. This is a request only; final availability will be confirmed by our concierge team.</p></div><button id="shareBtn" disabled>Copy selection link</button></div>
+    <div class="note">Online booking is not available. Your selection will be sent to our staff for personal assistance and availability confirmation.</div>
+  </main>
+  <div class="floating-share"><span><b id="floatingCount">0</b> selected</span><button id="floatingShareBtn" disabled>Copy selection link</button></div>
+  <footer><div class="footer-inner"><div><h2>Kinoko Club Concierge</h2><p>Private experiences and personalized itineraries in Japan.</p></div><div><div class="footer-label">CONTACT</div><p><a href="mailto:info@kinoko-group.co.jp">info@kinoko-group.co.jp</a><br><a href="tel:+81-3-6868-8565">+81 (0)3 6868 8565</a></p></div><div><div class="footer-label">FOLLOW</div><p><a href="https://www.instagram.com/kinokoclubconcierge" target="_blank" rel="noreferrer">Instagram</a><br><a href="https://kinoko-group.co.jp/kinokoeng/index.php" target="_blank" rel="noreferrer">Company website</a></p></div></div></footer>
+  <script>
+    const standardFiles = [
+      "LINE_ALBUM_袷　Mサイズ_260811_48.jpg","LINE_ALBUM_袷　Mサイズ_260811_49.jpg","LINE_ALBUM_単衣　Mサイズ_260811_1.jpg","LINE_ALBUM_単衣　Mサイズ_260811_3.jpg","LINE_ALBUM_単衣　Mサイズ_260811_2.jpg","LINE_ALBUM_単衣　Mサイズ_260811_6.jpg","LINE_ALBUM_袷　Mサイズ_260811_8.jpg","LINE_ALBUM_袷　Mサイズ_260811_9.jpg","LINE_ALBUM_単衣　Mサイズ_260811_7.jpg","LINE_ALBUM_単衣　Mサイズ_260811_5.jpg","LINE_ALBUM_単衣　Mサイズ_260811_4.jpg","LINE_ALBUM_単衣　Sサイズ_260811_2.jpg","LINE_ALBUM_単衣　Lサイズ_260811_1.jpg","LINE_ALBUM_袷　Sサイズ_260811_16.jpg","LINE_ALBUM_単衣　Mサイズ_260811_10.jpg","LINE_ALBUM_単衣　Lサイズ_260811_16.jpg","LINE_ALBUM_袷　Lサイズ_260811_11.jpg","LINE_ALBUM_袷　Mサイズ_260811_17.jpg","LINE_ALBUM_単衣　Sサイズ_260811_11.jpg","LINE_ALBUM_単衣　Sサイズ_260811_10.jpg","LINE_ALBUM_袷　Lサイズ_260811_10.jpg","LINE_ALBUM_袷　Mサイズ_260811_16.jpg","LINE_ALBUM_単衣　Mサイズ_260811_11.jpg","LINE_ALBUM_単衣　Lサイズ_260811_17.jpg","LINE_ALBUM_袷　Sサイズ_260811_17.jpg","LINE_ALBUM_単衣　Sサイズ_260811_3.jpg","LINE_ALBUM_単衣　Sサイズ_260811_1.jpg","LINE_ALBUM_単衣　Lサイズ_260811_2.jpg","LINE_ALBUM_袷　Sサイズ_260811_15.jpg","LINE_ALBUM_袷　Sサイズ_260811_29.jpg","LINE_ALBUM_単衣　Lサイズ_260811_15.jpg","LINE_ALBUM_単衣　Mサイズ_260811_13.jpg","LINE_ALBUM_袷　Mサイズ_260811_28.jpg","LINE_ALBUM_袷　Mサイズ_260811_14.jpg","LINE_ALBUM_袷　Lサイズ_260811_12.jpg","LINE_ALBUM_単衣　Sサイズ_260811_12.jpg","LINE_ALBUM_単衣　Sサイズ_260811_13.jpg","LINE_ALBUM_袷　Mサイズ_260811_15.jpg","LINE_ALBUM_袷　Lサイズ_260811_13.jpg","LINE_ALBUM_袷　Mサイズ_260811_29.jpg","LINE_ALBUM_単衣　Lサイズ_260811_14.jpg","LINE_ALBUM_単衣　Mサイズ_260811_12.jpg","LINE_ALBUM_袷　Sサイズ_260811_28.jpg","LINE_ALBUM_袷　Sサイズ_260811_14.jpg","LINE_ALBUM_単衣　Lサイズ_260811_3.jpg","LINE_ALBUM_単衣　Sサイズ_260811_4.jpg","LINE_ALBUM_単衣　Lサイズ_260811_7.jpg","LINE_ALBUM_袷　Lサイズ_260811_9.jpg","LINE_ALBUM_袷　Sサイズ_260811_10.jpg","LINE_ALBUM_単衣　Mサイズ_260811_16.jpg","LINE_ALBUM_単衣　Lサイズ_260811_10.jpg","LINE_ALBUM_袷　Lサイズ_260811_17.jpg","LINE_ALBUM_袷　Mサイズ_260811_11.jpg","LINE_ALBUM_袷　Mサイズ_260811_39.jpg","LINE_ALBUM_単衣　Sサイズ_260811_17.jpg","LINE_ALBUM_単衣　Sサイズ_260811_16.jpg","LINE_ALBUM_袷　Mサイズ_260811_38.jpg","LINE_ALBUM_袷　Lサイズ_260811_16.jpg","LINE_ALBUM_袷　Mサイズ_260811_10.jpg","LINE_ALBUM_単衣　Mサイズ_260811_17.jpg","LINE_ALBUM_単衣　Lサイズ_260811_11.jpg","LINE_ALBUM_袷　Sサイズ_260811_11.jpg","LINE_ALBUM_袷　Lサイズ_260811_8.jpg","LINE_ALBUM_単衣　Lサイズ_260811_6.jpg","LINE_ALBUM_単衣　Sサイズ_260811_5.jpg","LINE_ALBUM_単衣　Sサイズ_260811_7.jpg","LINE_ALBUM_単衣　Lサイズ_260811_4.jpg","LINE_ALBUM_袷　Sサイズ_260811_13.jpg","LINE_ALBUM_単衣　Lサイズ_260811_13.jpg","LINE_ALBUM_単衣　Mサイズ_260811_15.jpg","LINE_ALBUM_袷　Sサイズ_260811_9.jpg","LINE_ALBUM_単衣　Mサイズ_260811_29.jpg","LINE_ALBUM_袷　Mサイズ_260811_12.jpg","LINE_ALBUM_袷　Lサイズ_260811_14.jpg","LINE_ALBUM_袷　Lサイズ_260811_28.jpg","LINE_ALBUM_単衣　Sサイズ_260811_14.jpg","LINE_ALBUM_単衣　Sサイズ_260811_15.jpg","LINE_ALBUM_袷　Lサイズ_260811_29.jpg","LINE_ALBUM_袷　Mサイズ_260811_13.jpg","LINE_ALBUM_袷　Lサイズ_260811_15.jpg","LINE_ALBUM_単衣　Mサイズ_260811_28.jpg","LINE_ALBUM_袷　Sサイズ_260811_8.jpg","LINE_ALBUM_単衣　Lサイズ_260811_12.jpg","LINE_ALBUM_単衣　Mサイズ_260811_14.jpg","LINE_ALBUM_袷　Sサイズ_260811_12.jpg","LINE_ALBUM_単衣　Lサイズ_260811_5.jpg","LINE_ALBUM_単衣　Sサイズ_260811_6.jpg","LINE_ALBUM_単衣　Lサイズ_260811_8.jpg","LINE_ALBUM_袷　Sサイズ_260811_23.jpg","LINE_ALBUM_袷　Lサイズ_260811_6.jpg","LINE_ALBUM_袷　Sサイズ_260811_5.jpg","LINE_ALBUM_単衣　Mサイズ_260811_19.jpg","LINE_ALBUM_単衣　Mサイズ_260811_31.jpg","LINE_ALBUM_単衣　Mサイズ_260811_25.jpg","LINE_ALBUM_袷　Lサイズ_260811_18.jpg","LINE_ALBUM_袷　Lサイズ_260811_30.jpg","LINE_ALBUM_袷　Mサイズ_260811_36.jpg","LINE_ALBUM_袷　Mサイズ_260811_22.jpg","LINE_ALBUM_袷　Lサイズ_260811_24.jpg","LINE_ALBUM_単衣　Sサイズ_260811_18.jpg","LINE_ALBUM_袷　Mサイズ_260811_23.jpg","LINE_ALBUM_袷　Lサイズ_260811_25.jpg","LINE_ALBUM_袷　Lサイズ_260811_31.jpg","LINE_ALBUM_袷　Mサイズ_260811_37.jpg","LINE_ALBUM_袷　Lサイズ_260811_19.jpg","LINE_ALBUM_単衣　Mサイズ_260811_24.jpg","LINE_ALBUM_単衣　Mサイズ_260811_30.jpg","LINE_ALBUM_単衣　Mサイズ_260811_18.jpg","LINE_ALBUM_袷　Sサイズ_260811_4.jpg","LINE_ALBUM_袷　Lサイズ_260811_7.jpg","LINE_ALBUM_袷　Sサイズ_260811_22.jpg","LINE_ALBUM_単衣　Lサイズ_260811_9.jpg","LINE_ALBUM_単衣　Sサイズ_260811_8.jpg","LINE_ALBUM_袷　Lサイズ_260811_5.jpg","LINE_ALBUM_袷　Sサイズ_260811_20.jpg","LINE_ALBUM_袷　Sサイズ_260811_6.jpg","LINE_ALBUM_単衣　Mサイズ_260811_26.jpg","LINE_ALBUM_単衣　Lサイズ_260811_20.jpg","LINE_ALBUM_単衣　Mサイズ_260811_32.jpg","LINE_ALBUM_袷　Lサイズ_260811_27.jpg","LINE_ALBUM_袷　Mサイズ_260811_21.jpg","LINE_ALBUM_袷　Mサイズ_260811_35.jpg","LINE_ALBUM_袷　Lサイズ_260811_33.jpg","LINE_ALBUM_袷　Mサイズ_260811_34.jpg","LINE_ALBUM_袷　Lサイズ_260811_32.jpg","LINE_ALBUM_袷　Lサイズ_260811_26.jpg","LINE_ALBUM_袷　Mサイズ_260811_20.jpg","LINE_ALBUM_単衣　Mサイズ_260811_33.jpg","LINE_ALBUM_単衣　Mサイズ_260811_27.jpg","LINE_ALBUM_袷　Sサイズ_260811_7.jpg","LINE_ALBUM_袷　Sサイズ_260811_21.jpg","LINE_ALBUM_袷　Lサイズ_260811_4.jpg","LINE_ALBUM_単衣　Sサイズ_260811_9.jpg","LINE_ALBUM_袷　Sサイズ_260811_19.jpg","LINE_ALBUM_袷　Sサイズ_260811_31.jpg","LINE_ALBUM_袷　Sサイズ_260811_25.jpg","LINE_ALBUM_単衣　Mサイズ_260811_23.jpg","LINE_ALBUM_単衣　Lサイズ_260811_19.jpg","LINE_ALBUM_袷　Sサイズ_260811_3.jpg","LINE_ALBUM_袷　Mサイズ_260811_24.jpg","LINE_ALBUM_袷　Lサイズ_260811_22.jpg","LINE_ALBUM_袷　Lサイズ_260811_36.jpg","LINE_ALBUM_袷　Mサイズ_260811_30.jpg","LINE_ALBUM_袷　Mサイズ_260811_18.jpg","LINE_ALBUM_袷　Mサイズ_260811_19.jpg","LINE_ALBUM_袷　Mサイズ_260811_31.jpg","LINE_ALBUM_袷　Mサイズ_260811_25.jpg","LINE_ALBUM_袷　Lサイズ_260811_23.jpg","LINE_ALBUM_袷　Sサイズ_260811_2.jpg","LINE_ALBUM_単衣　Lサイズ_260811_18.jpg","LINE_ALBUM_単衣　Mサイズ_260811_22.jpg","LINE_ALBUM_袷　Sサイズ_260811_24.jpg","LINE_ALBUM_袷　Lサイズ_260811_1.jpg","LINE_ALBUM_袷　Sサイズ_260811_30.jpg","LINE_ALBUM_袷　Sサイズ_260811_18.jpg","LINE_ALBUM_袷　Sサイズ_260811_26.jpg","LINE_ALBUM_袷　Lサイズ_260811_3.jpg","LINE_ALBUM_袷　Sサイズ_260811_32.jpg","LINE_ALBUM_単衣　Mサイズ_260811_20.jpg","LINE_ALBUM_袷　Mサイズ_260811_33.jpg","LINE_ALBUM_袷　Lサイズ_260811_35.jpg","LINE_ALBUM_袷　Lサイズ_260811_21.jpg","LINE_ALBUM_袷　Mサイズ_260811_27.jpg","LINE_ALBUM_袷　Lサイズ_260811_20.jpg","LINE_ALBUM_袷　Mサイズ_260811_26.jpg","LINE_ALBUM_袷　Mサイズ_260811_32.jpg","LINE_ALBUM_袷　Lサイズ_260811_34.jpg","LINE_ALBUM_袷　Sサイズ_260811_1.jpg","LINE_ALBUM_単衣　Mサイズ_260811_21.jpg","LINE_ALBUM_袷　Sサイズ_260811_33.jpg","LINE_ALBUM_袷　Lサイズ_260811_2.jpg","LINE_ALBUM_袷　Sサイズ_260811_27.jpg","LINE_ALBUM_単衣　Mサイズ_260811_9.jpg","LINE_ALBUM_袷　Mサイズ_260811_7.jpg","LINE_ALBUM_袷　Mサイズ_260811_41.jpg","LINE_ALBUM_袷　Mサイズ_260811_40.jpg","LINE_ALBUM_袷　Mサイズ_260811_54.jpg","LINE_ALBUM_袷　Mサイズ_260811_6.jpg","LINE_ALBUM_単衣　Mサイズ_260811_8.jpg","LINE_ALBUM_袷　Mサイズ_260811_4.jpg","LINE_ALBUM_袷　Mサイズ_260811_42.jpg","LINE_ALBUM_袷　Mサイズ_260811_43.jpg","LINE_ALBUM_袷　Mサイズ_260811_5.jpg","LINE_ALBUM_袷　Mサイズ_260811_1.jpg","LINE_ALBUM_袷　Mサイズ_260811_47.jpg","LINE_ALBUM_袷　Mサイズ_260811_53.jpg","LINE_ALBUM_袷　Mサイズ_260811_52.jpg","LINE_ALBUM_袷　Mサイズ_260811_46.jpg","LINE_ALBUM_袷　Mサイズ_260811_2.jpg","LINE_ALBUM_袷　Mサイズ_260811_50.jpg","LINE_ALBUM_袷　Mサイズ_260811_44.jpg","LINE_ALBUM_袷　Mサイズ_260811_45.jpg","LINE_ALBUM_袷　Mサイズ_260811_51.jpg","LINE_ALBUM_袷　Mサイズ_260811_3.jpg"
+    ];
+    const categoryFiles = {
+      standard: standardFiles.map(name => ({ name, src: `assets/${encodeURIComponent(name)}` })),
+      high: ["LINE_ALBUM_袷　ハイクラス　Sサイズ_260811_1.jpg","LINE_ALBUM_袷　ハイクラス　Sサイズ_260811_2.jpg","LINE_ALBUM_袷　ハイクラス　Sサイズ_260811_3.jpg","LINE_ALBUM_袷　ハイクラス　Lサイズ_260811_1.jpg","LINE_ALBUM_袷　ハイクラス　Lサイズ_260811_2.jpg","LINE_ALBUM_袷　ハイクラス　Lサイズ_260811_3.jpg"].map(name => ({ name, src: `assets/high-grade/${encodeURIComponent(name)}` })),
+      summer: ["LINE_ALBUM_夏物　Sサイズ_260811_1.jpg","LINE_ALBUM_夏物　Sサイズ_260811_2.jpg","LINE_ALBUM_夏物　Mサイズ_260811_1.jpg","LINE_ALBUM_夏物　Mサイズ_260811_2.jpg","LINE_ALBUM_夏物　Lサイズ_260811_1.jpg","LINE_ALBUM_夏物　Lサイズ_260811_2.jpg"].map(name => ({ name, src: `assets/summer-limit/${encodeURIComponent(name)}` }))
+    };
+    let category = 'standard'; const root = 'assets/'; let active = 'ALL'; const selected = new Set();
+    const shareBtn = document.querySelector('#shareBtn'); const floatingShareBtn = document.querySelector('#floatingShareBtn');
+    function updateShare() { const label = selected.size ? `Copy selection link (${selected.size})` : 'Copy selection link'; shareBtn.disabled = selected.size === 0; shareBtn.textContent = label; floatingShareBtn.disabled = selected.size === 0; floatingShareBtn.textContent = label; document.querySelector('#floatingCount').textContent = selected.size; }
+    function copySelectionLink() { const payload = btoa(unescape(encodeURIComponent(JSON.stringify([...selected])))); const url = `${location.origin}${location.pathname}#selection=${payload}`; navigator.clipboard?.writeText(url).then(() => { shareBtn.textContent = 'Link copied'; setTimeout(updateShare, 1800); }); }
+    shareBtn.addEventListener('click', copySelectionLink); floatingShareBtn.addEventListener('click', copySelectionLink);
+    const sizeOf = name => (name.match(/([SML])サイズ/) || [,'?'])[1];
+    function render() { const files = categoryFiles[category]; const visible = files.filter(f => active === 'ALL' || sizeOf(f.name) === active); document.querySelector('#shownCount').textContent = `${visible.length} pieces shown`; document.querySelector('#grid').innerHTML = visible.length ? visible.map((f, i) => { const id = `${category}:${f.name}`; const on = selected.has(id); return `<article class="item ${on?'selected':''}"><div class="photo"><img loading="lazy" src="${f.src}" alt="${category} kimono piece, size ${sizeOf(f.name)}"><button class="choose" data-id="${encodeURIComponent(id)}">${on?'Selected':'Select this piece'}</button></div><div class="meta"><span>${category === 'summer' ? 'Summer' : category === 'high' ? 'High Grade' : 'Standard'} · ${String(i+1).padStart(3,'0')}</span><small class="size">SIZE ${sizeOf(f.name)}</small></div></article>`; }).join('') : '<div class="empty">No pieces found.</div>'; document.querySelector('#selectedCount').textContent = selected.size; }
+    document.querySelectorAll('.collection').forEach(b => b.addEventListener('click', () => { category=b.dataset.collection; active='ALL'; document.querySelectorAll('.collection').forEach(x=>x.classList.toggle('active',x===b)); document.querySelectorAll('.filter').forEach(x=>x.classList.toggle('active',x.dataset.size==='ALL')); render(); }));
+    document.querySelectorAll('.filter').forEach(b => b.addEventListener('click', () => { active=b.dataset.size; document.querySelectorAll('.filter').forEach(x=>x.classList.toggle('active',x===b)); render(); }));
+    document.querySelector('#grid').addEventListener('click', e => { const b=e.target.closest('.choose'); if(!b)return; const id=decodeURIComponent(b.dataset.id); selected.has(id)?selected.delete(id):selected.add(id); render(); updateShare(); });
+    document.querySelector('#clear').addEventListener('click', () => { selected.clear(); render(); }); render(); updateShare();
+  </script>
+</body>
+</html>
