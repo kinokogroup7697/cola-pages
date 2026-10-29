@@ -539,6 +539,105 @@ input::placeholder,textarea::placeholder{font-size:13px}
 .site-header.site-header a:hover,.site-footer.footer-option.footer-A a:hover{color:#0b528c}
 .site-header.site-header a:focus-visible,.site-footer.footer-option.footer-A a:focus-visible{outline-color:#153c65}
 </style>
+<style id="mobile-refinement-20261029">
+/* Phone-only refinement. Confirmed desktop, content, assets and behavior are untouched. */
+@media(max-width:700px){
+html{scroll-padding-top:116px}
+body{font-size:16px;line-height:1.85;letter-spacing:.015em}
+.wrap{width:calc(100% - 32px)}
+.section{padding:44px 0}
+.section-title{font-size:28px;line-height:1.5}
+.heading{margin-bottom:24px}
+.eyebrow{font-size:14px;margin-bottom:8px}
+.site-header .header-inner{min-height:104px;padding:6px 0 4px;gap:2px}
+.site-header .brand{font-size:22px;letter-spacing:.015em;min-height:44px}
+.site-header .nav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;width:100%;font-size:14px;line-height:1.5}
+.site-header .nav a{display:flex;align-items:center;justify-content:center;min-height:44px;padding:8px 0;border:0;border-radius:5px}
+.site-header .nav a:hover{background:#edf5fd}
+#photo-wall{height:auto;max-height:none;aspect-ratio:1672 / 941}
+#photo-wall img{width:100%;height:auto;object-fit:contain}
+#strengths{padding:28px 0 44px}
+#strengths .intro-B{padding:26px 18px}
+#strengths .intro-B h1{font-size:28px}
+#strengths .intro-B .statement{font-size:clamp(18px,5vw,22px);line-height:1.65;letter-spacing:0;margin-top:12px;text-wrap:initial}
+#strengths .intro-B .intro-copy{margin-top:20px;font-size:16px;line-height:1.85}
+#strengths .intro-B .intro-keywords{font-size:16px;text-wrap:balance}
+#strengths .intro-B .intro-copy p+p{font-size:16px;padding-top:16px;margin-top:16px}
+#strengths .strength-card:nth-child(n){grid-template-columns:36px minmax(0,1fr);gap:16px 8px;margin:0;padding:24px 0}
+#strengths .strength-card:nth-child(even){padding:24px 14px;border-radius:8px}
+#strengths .strength-card:nth-child(n) .number{grid-column:1;grid-row:1;font-size:25px;line-height:1.5;align-self:start}
+#strengths .strength-card:nth-child(n) .strength-label{grid-column:2;grid-row:1;font-size:19px;line-height:1.6;align-self:start}
+#strengths .strength-card:nth-child(n) .strength-photo{grid-column:1/-1;grid-row:2;width:100%;max-width:none}
+#strengths .strength-card:nth-child(n) p{grid-column:1/-1;grid-row:3;font-size:16px;line-height:1.85}
+.use-scenes{gap:24px}
+.scene-copy{padding:20px 18px}
+.scene-copy h3{font-size:25px;margin:6px 0 12px}
+.scene-number{font-size:20px}
+.scene-lead,.scene-detail{font-size:16px;line-height:1.85;letter-spacing:.015em}
+.scene-copy .text-link{display:flex;align-items:center;justify-content:space-between;min-height:46px;margin-top:20px;padding:8px 0;font-size:16px}
+#fleet .layout-pair-A .fleet-layout-heading{gap:8px;margin-bottom:14px}
+#fleet .layout-pair-A .fleet-layout-heading .fleet-count{font-size:14px}
+#fleet .layout-pair-A .fleet-layout-heading .fleet-count b{font-size:17px}
+#fleet .layout-pair-A .rosa-layout-grid{grid-template-columns:minmax(0,1fr);gap:16px}
+#fleet .layout-pair-A .rosa-plan{padding:18px 16px}
+#fleet .layout-pair-A .rosa-plan figcaption{font-size:19px;margin-bottom:14px}
+#fleet .layout-pair-A .rosa-units{font-size:16px;padding:2px 9px;background:#edf5fd;border-radius:4px}
+#fleet .rosa-orientation,#fleet .rosa-driver,#fleet .rosa-caption{font-size:14px}
+#fleet .layout-pair-A .rosa-cabin{max-width:224px}
+#fleet .rosa-rows{height:276px;grid-auto-rows:36px}
+#fleet .layout-pair-A .fleet-layout>.fleet-note{font-size:14px;line-height:1.8;margin-top:14px}
+#fleet .fleet-gallery-heading{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center}
+#fleet .fleet-gallery-heading p{font-size:14px;margin:0}
+#fleet .fleet-gallery-bar{flex-direction:column;align-items:stretch;gap:8px;padding:12px 0}
+#fleet .fleet-current-caption{font-size:15px;padding:0;min-height:26px}
+#fleet .fleet-controls{justify-content:space-between;gap:12px}
+#fleet .fleet-controls button{width:48px;height:44px;font-size:22px;border-radius:5px}
+#fleet .fleet-counter{font-size:14px}
+#fleet .fleet-thumbs{grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+#fleet .fleet-thumb{min-height:44px;aspect-ratio:1670 / 942;border-radius:4px}
+#fleet .gallery-caption{font-size:14px;line-height:1.8;margin-top:16px}
+#fleet .fleet-stage::after{font-size:14px;padding:5px 10px}
+#photo-dialog{padding-top:52px;width:min(94vw,calc((94vh - 104px)*var(--photo-ratio)))}
+#photo-dialog .close-dialog{min-height:44px;min-width:88px;top:4px;right:4px;font-size:16px}
+#photo-dialog p{font-size:14px;padding:0 8px}
+#contact{padding:44px 0;font-size:16px}
+#contact>.wrap{width:calc(100% - 32px)}
+#contact .preview-note{font-size:14px;line-height:1.8;margin-bottom:20px}
+#contact .tab{min-height:48px;font-size:17px;padding:10px 6px}
+#contact [role=tabpanel]{padding:18px 10px}
+#contact .form-title{font-size:18px;margin-bottom:18px}
+#contact .form-grid{gap:12px}
+#contact .field{padding:12px 10px}
+#contact .field>label,#contact .field>legend,#contact .choices label{font-size:16px;line-height:1.75}
+#contact input:not([type=radio]):not([type=checkbox]){height:48px;min-height:48px;font-size:16px;padding:10px}
+#contact textarea{font-size:16px;min-height:128px;padding:10px;line-height:1.75}
+#contact input::placeholder,#contact textarea::placeholder{font-size:14px}
+#contact .date-time{grid-template-columns:minmax(0,1fr);gap:10px}
+#contact .choices{gap:4px 16px}
+#contact .choices label{min-height:44px;gap:8px}
+#contact input[type=radio],#contact input[type=checkbox]{width:20px;height:20px}
+#contact .help,#contact .consent,#contact .privacy-notice,#contact .form-status{font-size:14px;line-height:1.8}
+#contact .consent{align-items:center;gap:10px;margin:18px 0}
+#contact .consent input{margin:0}
+#contact .privacy-button{min-height:44px;text-align:left}
+#contact .consent label{display:inline-block;min-height:44px;padding:9px 0}
+#contact .submit{min-height:48px;width:100%;font-size:16px}
+.company-grid{gap:24px}
+.company-row{grid-template-columns:minmax(0,1fr);gap:4px;padding:16px 0;font-size:16px;line-height:1.8}
+.company-row dt{font-size:14px;font-weight:600}
+.company-row a{display:inline-flex;align-items:center;min-height:44px}
+.site-footer.footer-option{padding:32px 0 18px}
+.site-footer.footer-option .brand{font-size:22px;min-height:44px;white-space:nowrap}
+.site-footer.footer-option .footer-contact-title{font-size:21px;line-height:1.8}
+.site-footer.footer-A .footer-reservation{margin-top:20px;padding-top:20px}
+.site-footer.footer-A .footer-links{margin-top:18px}
+.site-footer.footer-A .footer-link-row{gap:4px;padding:12px 0}
+.site-footer.footer-A .footer-label{font-size:14px}
+.site-footer.footer-option .footer-value{display:flex;align-items:center;min-height:48px;font-size:17px;line-height:1.7;overflow-wrap:anywhere}
+.site-footer.footer-option .footer-bottom{font-size:14px;margin-top:24px;gap:8px}
+.site-footer .footer-bottom a{display:inline-flex;align-items:center;min-height:44px}
+}
+</style>
 </head>
 <body>
 <header class="site-header"><div class="wrap header-inner"><a class="brand" href="#strengths"><span class="brand-bus-icon" aria-hidden="true"><img src="assets/rosa-bus-brand-icon.jpeg" width="2136" height="1004" alt=""></span>金達国際株式会社</a><nav class="nav" aria-label="メインナビゲーション"><a href="#fleet">車種紹介</a><a href="#contact">お問い合わせ</a><a href="#company">会社概要</a></nav></div></header>
