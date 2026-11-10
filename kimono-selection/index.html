@@ -87,6 +87,34 @@
     .shop2-item .choose { position:static; opacity:1; display:block; width:100%; }
     .shop2-item .meta { overflow-wrap:anywhere; }
     #selectionSummary { white-space:pre-line; overflow-wrap:anywhere; font-size:12px; line-height:1.7; margin-top:16px; color:var(--muted); }
+    .selection-view { margin-bottom:24px; padding:20px; border:1px solid var(--accent); background:#fff; }
+    .selection-view h2 { margin:0 0 12px; font:400 26px Georgia,serif; }
+    .selection-view p, .selection-disclaimer, #generatedLinkPanel, #shareFeedback { font-size:13px; line-height:1.6; overflow-wrap:anywhere; }
+    #viewFullCollection { border:1px solid var(--ink); background:var(--ink); color:#fff; padding:12px 18px; min-height:44px; }
+    #generatedSelectionLink { display:block; padding:12px 0; overflow-wrap:anywhere; color:var(--accent); }
+    .choose, .share button, .floating-share button, .clear, .shop-service h3 button { min-height:44px; }
+    .meta { gap:8px; flex-wrap:wrap; overflow-wrap:anywhere; }
+    .selection-only .photo { aspect-ratio:auto; }
+    .selection-only .photo img { height:auto; object-fit:contain; transform:none; }
+    .selection-only .choose { position:static; display:block; width:100%; opacity:1; }
+    .selection-only .shop-comparison { margin-bottom:18px; }
+    body { padding-bottom:100px; }
+    @media (max-width:800px) {
+      .shop-service h3 button { width:100%; padding-right:20px; }
+      .shop-service.active { border-left:5px solid var(--accent); }
+      .selection-only .grid { grid-template-columns:1fr; gap:28px; }
+      .photo { aspect-ratio:auto; }
+      .photo img { height:auto; object-fit:contain; transform:none; }
+      .choose { position:static; display:block; width:100%; opacity:1; padding:12px 6px; letter-spacing:.02em; }
+      .floating-share { padding:8px; gap:8px; bottom:max(8px,env(safe-area-inset-bottom)); }
+      .floating-share button { white-space:normal; min-width:0; line-height:1.4; }
+      .share button { white-space:normal; width:100%; min-width:0; }
+      .selection-view { padding:16px; }
+      .selection-view button { width:100%; }
+      .collection { min-width:0; min-height:44px; }
+      .filter { min-height:44px; }
+      body { padding-bottom:calc(100px + env(safe-area-inset-bottom)); }
+    }
   </style>
 </head>
 <body>
@@ -95,6 +123,11 @@
     <div class="intro"><div><h1>Choose your kimono</h1><p id="introText">Select three preferred kimonos in advance, then see and compare them in person at the Ginza shop before making your final choice.</p></div><div class="count" id="shownCount"></div></div>
   </header>
   <main>
+    <section id="selectionView" class="selection-view" aria-labelledby="selectionViewTitle" hidden>
+      <h2 id="selectionViewTitle">Selected pieces</h2>
+      <p id="selectionViewStatus" role="status"></p>
+      <button id="viewFullCollection" type="button">View full collection</button>
+    </section>
     <section class="shop-comparison" aria-labelledby="shopComparisonTitle">
       <h2 id="shopComparisonTitle">Two ways to enjoy your kimono</h2>
       <div class="shop-comparison-grid" role="group" aria-label="Choose a shop">
@@ -125,6 +158,9 @@
     <section class="grid" id="grid" aria-live="polite"></section>
     <div class="share"><div><div class="footer-label">SEND YOUR SELECTION</div><p>Share your preferred pieces with our staff. This is a request only; final availability will be confirmed by our concierge team.</p></div><button id="shareBtn" disabled>Copy selection link</button></div>
     <div id="selectionSummary" aria-live="polite" hidden></div>
+    <p id="shareFeedback" role="status" aria-live="polite"></p>
+    <div id="generatedLinkPanel" hidden><p id="linkScope"></p><a id="generatedSelectionLink" href="#">Open selected pieces</a></div>
+    <p class="selection-disclaimer">Piece IDs in a selection link do not reserve a kimono or lock inventory. This is a request only; availability is confirmed by our concierge team.</p>
     <div class="note">Online booking is not available. Your selection will be sent to our staff for personal assistance and availability confirmation.</div>
   </main>
   <div class="floating-share"><span><b id="floatingCount">0</b> selected</span><button id="floatingShareBtn" disabled>Copy selection link</button></div>
@@ -140,6 +176,7 @@
     };
     const shop2Files = [{"id": "MW-28", "category": "premium", "src": "./shop2-images/MW-28.webp"}, {"id": "29", "category": "premium", "src": "./shop2-images/29.webp"}, {"id": "27", "category": "premium", "src": "./shop2-images/27.webp"}, {"id": "15", "category": "premium", "src": "./shop2-images/15.webp"}, {"id": "14", "category": "premium", "src": "./shop2-images/14.webp"}, {"id": "13", "category": "premium", "src": "./shop2-images/13.webp"}, {"id": "26", "category": "premium", "src": "./shop2-images/26.webp"}, {"id": "23", "category": "premium", "src": "./shop2-images/23.webp"}, {"id": "24", "category": "premium", "src": "./shop2-images/24.jpg"}, {"id": "22", "category": "premium", "src": "./shop2-images/22.jpg"}, {"id": "19", "category": "premium", "src": "./shop2-images/19.jpg"}, {"id": "18", "category": "premium", "src": "./shop2-images/18.jpg"}, {"id": "16", "category": "premium", "src": "./shop2-images/16.jpg"}, {"id": "17", "category": "premium", "src": "./shop2-images/17.jpg"}, {"id": "1", "category": "premium", "src": "./shop2-images/1.jpg"}, {"id": "20", "category": "premium", "src": "./shop2-images/20.jpg"}, {"id": "25", "category": "premium", "src": "./shop2-images/25.jpg"}, {"id": "Z-505", "category": "standard", "src": "./shop2-images/Z-505.jpg"}, {"id": "Z-373", "category": "standard", "src": "./shop2-images/Z-373.jpg"}, {"id": "Z-322", "category": "standard", "src": "./shop2-images/Z-322.jpg"}, {"id": "Y-356", "category": "standard", "src": "./shop2-images/Y-356.jpg"}, {"id": "Y-245", "category": "standard", "src": "./shop2-images/Y-245.jpg"}, {"id": "W-506", "category": "standard", "src": "./shop2-images/W-506.jpg"}, {"id": "P-368", "category": "standard", "src": "./shop2-images/P-368.jpg"}, {"id": "P-345", "category": "standard", "src": "./shop2-images/P-345.jpg"}, {"id": "P-334", "category": "standard", "src": "./shop2-images/P-334.jpg"}, {"id": "K-311", "category": "standard", "src": "./shop2-images/K-311.jpg"}, {"id": "B-330", "category": "standard", "src": "./shop2-images/B-330.jpg"}, {"id": "B-277", "category": "standard", "src": "./shop2-images/B-277.jpg"}, {"id": "B-374", "category": "standard", "src": "./shop2-images/B-374.jpg"}, {"id": "G-239", "category": "standard", "src": "./shop2-images/G-239.jpg"}, {"id": "G-267", "category": "standard", "src": "./shop2-images/G-267.jpg"}, {"id": "G-340", "category": "standard", "src": "./shop2-images/G-340.jpg"}, {"id": "K-203", "category": "standard", "src": "./shop2-images/K-203.jpg"}, {"id": "K-252", "category": "standard", "src": "./shop2-images/K-252.jpg"}, {"id": "K-262", "category": "standard", "src": "./shop2-images/K-262.jpg"}, {"id": "K-264", "category": "standard", "src": "./shop2-images/K-264.jpg"}, {"id": "K-286", "category": "standard", "src": "./shop2-images/K-286.jpg"}, {"id": "K-372", "category": "standard", "src": "./shop2-images/K-372.jpg"}, {"id": "Y-312", "category": "standard", "src": "./shop2-images/Y-312.jpg"}, {"id": "Z-206", "category": "standard", "src": "./shop2-images/Z-206.jpg"}, {"id": "Z-299", "category": "standard", "src": "./shop2-images/Z-299.jpg"}, {"id": "Z-341", "category": "standard", "src": "./shop2-images/Z-341.jpg"}, {"id": "Z-370", "category": "standard", "src": "./shop2-images/Z-370.jpg"}, {"id": "21", "category": "premium", "src": "./shop2-images/21.jpg"}, {"id": "P-284", "category": "standard", "src": "./shop2-images/P-284.jpg"}, {"id": "Y-291", "category": "standard", "src": "./shop2-images/Y-291.jpg"}, {"id": "Y-290", "category": "standard", "src": "./shop2-images/Y-290.jpg"}, {"id": "B-279", "category": "standard", "src": "./shop2-images/B-279.jpg"}, {"id": "K-263", "category": "standard", "src": "./shop2-images/K-263.jpg"}, {"id": "G-270", "category": "standard", "src": "./shop2-images/G-270.jpg"}, {"id": "W-343", "category": "standard", "src": "./shop2-images/W-343.jpg"}, {"id": "2", "category": "premium", "src": "./shop2-images/2.jpg"}, {"id": "5", "category": "premium", "src": "./shop2-images/5.jpg"}, {"id": "7", "category": "premium", "src": "./shop2-images/7.jpg"}, {"id": "6", "category": "premium", "src": "./shop2-images/6.jpg"}, {"id": "4", "category": "premium", "src": "./shop2-images/4.jpg"}, {"id": "K-255", "category": "standard", "src": "./shop2-images/K-255.jpg"}, {"id": "G-351", "category": "standard", "src": "./shop2-images/G-351.jpg"}, {"id": "Z-357", "category": "standard", "src": "./shop2-images/Z-357.jpg"}, {"id": "Z-329", "category": "standard", "src": "./shop2-images/Z-329.jpg"}, {"id": "G-352", "category": "standard", "src": "./shop2-images/G-352.jpg"}, {"id": "W-526", "category": "standard", "src": "./shop2-images/W-526.jpg"}, {"id": "W-333", "category": "standard", "src": "./shop2-images/W-333.jpg"}, {"id": "B-358", "category": "standard", "src": "./shop2-images/B-358.jpg"}, {"id": "P-344", "category": "standard", "src": "./shop2-images/P-344.jpg"}, {"id": "W-228", "category": "standard", "src": "./shop2-images/W-228.jpg"}, {"id": "Y-235", "category": "standard", "src": "./shop2-images/Y-235.jpg"}, {"id": "B-521", "category": "standard", "src": "./shop2-images/B-521.jpg"}, {"id": "B-232", "category": "standard", "src": "./shop2-images/B-232.jpg"}, {"id": "G-254", "category": "standard", "src": "./shop2-images/G-254.jpg"}, {"id": "W-507", "category": "standard", "src": "./shop2-images/W-507.jpg"}, {"id": "W-508", "category": "standard", "src": "./shop2-images/W-508.jpg"}, {"id": "Z-320", "category": "standard", "src": "./shop2-images/Z-320.jpg"}, {"id": "Z-319", "category": "standard", "src": "./shop2-images/Z-319.jpg"}, {"id": "Z-323", "category": "standard", "src": "./shop2-images/Z-323.jpg"}, {"id": "Z-332", "category": "standard", "src": "./shop2-images/Z-332.jpg"}, {"id": "B-321", "category": "standard", "src": "./shop2-images/B-321.jpg"}, {"id": "K-324", "category": "standard", "src": "./shop2-images/K-324.jpg"}, {"id": "Z-519", "category": "standard", "src": "./shop2-images/Z-519.jpg"}, {"id": "K-516", "category": "standard", "src": "./shop2-images/K-516.jpg"}, {"id": "K-517", "category": "standard", "src": "./shop2-images/K-517.jpg"}, {"id": "B-511", "category": "standard", "src": "./shop2-images/B-511.jpg"}, {"id": "K-325", "category": "standard", "src": "./shop2-images/K-325.jpg"}, {"id": "Z-215", "category": "standard", "src": "./shop2-images/Z-215.jpg"}, {"id": "Z-518", "category": "standard", "src": "./shop2-images/Z-518.jpg"}, {"id": "P-514", "category": "standard", "src": "./shop2-images/P-514.jpg"}, {"id": "P-233", "category": "standard", "src": "./shop2-images/P-233.jpg"}, {"id": "W-237", "category": "standard", "src": "./shop2-images/W-237.jpg"}, {"id": "Y-234", "category": "standard", "src": "./shop2-images/Y-234.jpg"}, {"id": "Y-295", "category": "standard", "src": "./shop2-images/Y-295.jpg"}, {"id": "W-309", "category": "standard", "src": "./shop2-images/W-309.jpg"}, {"id": "W-350", "category": "standard", "src": "./shop2-images/W-350.jpg"}, {"id": "K-304", "category": "standard", "src": "./shop2-images/K-304.jpg"}, {"id": "P-297", "category": "standard", "src": "./shop2-images/P-297.jpg"}, {"id": "P-217", "category": "standard", "src": "./shop2-images/P-217.jpg"}, {"id": "B-246", "category": "standard", "src": "./shop2-images/B-246.jpg"}, {"id": "B-247", "category": "standard", "src": "./shop2-images/B-247.jpg"}, {"id": "G-213", "category": "standard", "src": "./shop2-images/G-213.jpg"}, {"id": "Y-230", "category": "standard", "src": "./shop2-images/Y-230.jpg"}, {"id": "P-355", "category": "standard", "src": "./shop2-images/P-355.jpg"}, {"id": "P-219", "category": "standard", "src": "./shop2-images/P-219.jpg"}, {"id": "P-221", "category": "standard", "src": "./shop2-images/P-221.jpg"}, {"id": "Z-212", "category": "standard", "src": "./shop2-images/Z-212.jpg"}, {"id": "P-216", "category": "standard", "src": "./shop2-images/P-216.jpg"}, {"id": "B-248", "category": "standard", "src": "./shop2-images/B-248.jpg"}, {"id": "Z-214", "category": "standard", "src": "./shop2-images/Z-214.jpg"}, {"id": "Z-226", "category": "standard", "src": "./shop2-images/Z-226.jpg"}, {"id": "Z-224", "category": "standard", "src": "./shop2-images/Z-224.jpg"}, {"id": "Z-223", "category": "standard", "src": "./shop2-images/Z-223.jpg"}, {"id": "Z-222", "category": "standard", "src": "./shop2-images/Z-222.jpg"}, {"id": "W-229", "category": "standard", "src": "./shop2-images/W-229.jpg"}, {"id": "K-208", "category": "standard", "src": "./shop2-images/K-208.jpg"}, {"id": "K-207", "category": "standard", "src": "./shop2-images/K-207.jpg"}, {"id": "K-209", "category": "standard", "src": "./shop2-images/K-209.jpg"}, {"id": "B-342", "category": "standard", "src": "./shop2-images/B-342.jpg"}, {"id": "G-317", "category": "standard", "src": "./shop2-images/G-317.jpg"}, {"id": "Z-307", "category": "standard", "src": "./shop2-images/Z-307.jpg"}, {"id": "Z-326", "category": "standard", "src": "./shop2-images/Z-326.jpg"}, {"id": "W-310", "category": "standard", "src": "./shop2-images/W-310.jpg"}, {"id": "W-331", "category": "standard", "src": "./shop2-images/W-331.jpg"}, {"id": "K-303", "category": "standard", "src": "./shop2-images/K-303.jpg"}, {"id": "K-301", "category": "standard", "src": "./shop2-images/K-301.jpg"}, {"id": "K-202", "category": "standard", "src": "./shop2-images/K-202.jpg"}, {"id": "K-523", "category": "standard", "src": "./shop2-images/K-523.jpg"}, {"id": "K-302", "category": "standard", "src": "./shop2-images/K-302.jpg"}, {"id": "K-305", "category": "standard", "src": "./shop2-images/K-305.jpg"}, {"id": "K-210", "category": "standard", "src": "./shop2-images/K-210.jpg"}, {"id": "Y-510", "category": "standard", "src": "./shop2-images/Y-510.jpg"}, {"id": "B-512", "category": "standard", "src": "./shop2-images/B-512.jpg"}, {"id": "P-504", "category": "standard", "src": "./shop2-images/P-504.jpg"}, {"id": "P-503", "category": "standard", "src": "./shop2-images/P-503.jpg"}, {"id": "W-509", "category": "standard", "src": "./shop2-images/W-509.jpg"}, {"id": "K-502", "category": "standard", "src": "./shop2-images/K-502.jpg"}, {"id": "K-501", "category": "standard", "src": "./shop2-images/K-501.jpg"}, {"id": "B-363", "category": "standard", "src": "./shop2-images/B-363.jpg"}, {"id": "P-348", "category": "standard", "src": "./shop2-images/P-348.jpg"}, {"id": "G-362", "category": "standard", "src": "./shop2-images/G-362.jpg"}, {"id": "Z-361", "category": "standard", "src": "./shop2-images/Z-361.jpg"}, {"id": "W-359", "category": "standard", "src": "./shop2-images/W-359.jpg"}, {"id": "Y-349", "category": "standard", "src": "./shop2-images/Y-349.jpg"}, {"id": "Z-365", "category": "standard", "src": "./shop2-images/Z-365.jpg"}, {"id": "Z-364", "category": "standard", "src": "./shop2-images/Z-364.jpg"}, {"id": "Y-360", "category": "standard", "src": "./shop2-images/Y-360.jpg"}];
     let shop = 'shop2'; let category = 'standard'; let active = 'ALL'; const selected = new Set();
+    let selectionOnly = false; let selectionError = '';
     const shareBtn = document.querySelector('#shareBtn'); const floatingShareBtn = document.querySelector('#floatingShareBtn');
     const sizeOf = name => (name.match(/([SML])サイズ/) || [,'?'])[1];
     const labels = {standard:'Standard', high:'High Grade', summer:'Summer', premium:'Premium'};
@@ -148,7 +185,7 @@
     const escapeHtml = text => String(text).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
     function selectionLabel(id) { const one=shop1Keys.get(id); if(one) return `H · ${labels[one.category]} · ${String(one.number).padStart(3,'0')} · SIZE ${sizeOf(one.file.name)}`; const two=shop2Keys.get(id); return `K · ${labels[two.category]} · ${two.id}`; }
     function updateShare() {
-      const label=selected.size ? `Copy selection link (${selected.size})` : 'Copy selection link';
+      const label=selected.size ? `Copy selected pieces link (${selected.size})` : 'Copy selected pieces link';
       [shareBtn,floatingShareBtn].forEach(b=>{b.disabled=selected.size===0;b.textContent=label;});
       document.querySelector('#floatingCount').textContent=selected.size;
       document.querySelector('#selectedCount').textContent=selected.size;
@@ -156,43 +193,77 @@
       document.querySelector('#selectionSummary').hidden=!selected.size;
     }
     function selectionUrl() {
-      const payload=btoa(unescape(encodeURIComponent(JSON.stringify([...selected]))));
+      const items=[...selected].map(id=>({shop:shop1Keys.has(id)?'H':'K',id}));
+      const payload=btoa(unescape(encodeURIComponent(JSON.stringify({v:2,items}))));
       const url=new URL(location.href);url.hash=new URLSearchParams({selection:payload}).toString();return url.href;
     }
-    function showCopied() {shareBtn.textContent='Link copied';floatingShareBtn.textContent='Link copied';setTimeout(updateShare,1800);}
-    function fallbackCopy(url) {const input=document.createElement('textarea');input.value=url;input.setAttribute('readonly','');input.style.position='fixed';input.style.opacity='0';document.body.appendChild(input);input.select();input.setSelectionRange(0,input.value.length);let copied=false;try{copied=document.execCommand('copy');}catch(_){}input.remove();if(copied)showCopied();else window.prompt('Copy this selection link:',url);}
-    function copySelectionLink() {if(!selected.size)return;const url=selectionUrl();if(navigator.clipboard && window.isSecureContext)navigator.clipboard.writeText(url).then(showCopied).catch(()=>fallbackCopy(url));else fallbackCopy(url);}
+    function showCopied() {shareBtn.textContent='Link copied';floatingShareBtn.textContent='Link copied';document.querySelector('#shareFeedback').textContent='Link copied. It opens only these selected pieces.';setTimeout(updateShare,1800);}
+    function fallbackCopy(url) {const input=document.createElement('textarea');input.value=url;input.setAttribute('readonly','');input.style.position='fixed';input.style.opacity='0';document.body.appendChild(input);input.select();input.setSelectionRange(0,input.value.length);let copied=false;try{copied=document.execCommand('copy');}catch(_){}input.remove();if(copied)showCopied();else document.querySelector('#shareFeedback').textContent='Copy the link shown below, or open it to check your selection.';}
+    function copySelectionLink() {
+      if(!selected.size)return;
+      const url=selectionUrl();const link=document.querySelector('#generatedSelectionLink');link.href=url;link.textContent=url;document.querySelector('#generatedLinkPanel').hidden=false;
+      const local=location.protocol==='file:' || ['localhost','127.0.0.1','::1','[::1]'].includes(location.hostname);
+      document.querySelector('#linkScope').textContent=local?'Local preview link — works only where this local preview server is accessible. This is not a published customer link.':'Anyone with this link can view these selected pieces without signing in.';
+      document.querySelector('#shareFeedback').textContent='Selection link generated.';
+      if(navigator.clipboard && window.isSecureContext)navigator.clipboard.writeText(url).then(showCopied).catch(()=>fallbackCopy(url));else fallbackCopy(url);
+    }
     function restoreSelection() {
-      const match=location.hash.match(/(?:^#|&)selection=([^&]*)/);if(!match)return;
-      try {const items=JSON.parse(decodeURIComponent(escape(atob(decodeURIComponent(match[1])))));if(!Array.isArray(items))return;
-        selected.clear();items.forEach(id=>{if(typeof id==='string' && (shop1Keys.has(id)||shop2Keys.has(id)))selected.add(id);});
-        const first=[...selected][0];if(first){shop=shop1Keys.has(first)?'shop1':'shop2';category=shop==='shop1'?shop1Keys.get(first).category:shop2Keys.get(first).category;active='ALL';}
-      }catch(_){}
+      selected.clear();selectionError='';shop='shop2';category='standard';active='ALL';
+      const match=location.hash.match(/(?:^#|&)selection(?:=([^&]*))?(?=&|$)/);selectionOnly=!!match;if(!match)return;
+      try {
+        const payload=JSON.parse(decodeURIComponent(escape(atob(decodeURIComponent(match[1] || '')))));
+        let items;
+        if(Array.isArray(payload))items=payload;
+        else if(payload && payload.v===2 && Array.isArray(payload.items))items=payload.items.map(item=>{
+          if(!item || typeof item.id!=='string' || item.shop!==(shop1Keys.has(item.id)?'H':shop2Keys.has(item.id)?'K':null))throw Error('Invalid shop or piece');return item.id;
+        });
+        else throw Error('Invalid format');
+        if(!items.length){selectionError='This selection link contains no pieces. Choose View full collection to start a new selection.';return;}
+        if(items.some(id=>typeof id!=='string' || (!shop1Keys.has(id)&&!shop2Keys.has(id))))throw Error('Unknown piece');
+        items.forEach(id=>selected.add(id));
+        const first=[...selected][0];shop=shop1Keys.has(first)?'shop1':'shop2';category=shop==='shop1'?shop1Keys.get(first).category:shop2Keys.get(first).category;
+      }catch(_){selected.clear();selectionError='This selection link is invalid or contains unavailable piece IDs. Please ask the sender for a new link, or view the full collection.';}
+    }
+    function fullCollection(nextShop) {
+      selectionOnly=false;selectionError='';if(nextShop){shop=nextShop;category='standard';active='ALL';}
+      const url=new URL(location.href);url.hash='';history.replaceState(null,'',url);render();
+    }
+    function selectionChanged() {
+      document.querySelector('#generatedLinkPanel').hidden=true;document.querySelector('#shareFeedback').textContent='';
+      if(selectionOnly){selectionError=selected.size?'':'No pieces selected. Choose View full collection to select pieces.';history.replaceState(null,'',selectionUrl());}
+      render();
     }
     function render() {
+      document.body.classList.toggle('selection-only',selectionOnly);
+      document.querySelector('#selectionView').hidden=!selectionOnly;
+      document.querySelector('#selectionViewTitle').textContent=selectionError?'Selection unavailable':`Selected pieces (${selected.size})`;
+      document.querySelector('#selectionViewStatus').textContent=selectionError || 'This link shows only the pieces selected by the sender, across all shops and collections.';
       document.querySelectorAll('[data-shop]').forEach(b=>{b.classList.toggle('active',b.dataset.shop===shop);b.closest('.shop-service').classList.toggle('active',b.dataset.shop===shop);b.setAttribute('aria-pressed',String(b.dataset.shop===shop));});
-      document.querySelector('#shop1Collections').hidden=shop!=='shop1';document.querySelector('#shop2Collections').hidden=shop!=='shop2';
-      document.querySelector('.filters').hidden=shop!=='shop1';
+      document.querySelector('#shop1Collections').hidden=selectionOnly||shop!=='shop1';document.querySelector('#shop2Collections').hidden=selectionOnly||shop!=='shop2';
+      document.querySelector('.filters').hidden=selectionOnly||shop!=='shop1';
       document.querySelectorAll('[data-collection]').forEach(b=>b.classList.toggle('active',b.dataset.collection===category));
       document.querySelectorAll('[data-size]').forEach(b=>b.classList.toggle('active',b.dataset.size===active));
-      document.querySelector('#introText').textContent=shop==='shop1'?'Choose one kimono in advance for your hotel kimono experience. Please choose by size.':'Select three preferred kimonos in advance, then see and compare them in person at the Ginza shop before making your final choice.';
-      const files=shop==='shop1'?categoryFiles[category]:shop2Files.filter(f=>f.category===category);
-      const visible=shop==='shop1'?files.filter(f=>active==='ALL'||sizeOf(f.name)===active):files;
-      document.querySelector('#shownCount').textContent=`${shop==='shop1'?'H':'K'} · ${visible.length} pieces shown`;
-      document.querySelector('#grid').innerHTML=visible.length?visible.map((f,i)=>{
-        const isTwo=shop==='shop2';const id=isTwo?`shop2:${f.id}`:`${category}:${f.name}`;const on=selected.has(id);
-        const alt=isTwo?`K ${labels[category]} kimono ${f.id}`:`${category} kimono piece, size ${sizeOf(f.name)}`;
-        return `<article class="item ${isTwo?'shop2-item ':''}${on?'selected':''}"><div class="photo"><img loading="lazy" src="${escapeHtml(f.src)}" alt="${escapeHtml(alt)}"><button class="choose" data-id="${encodeURIComponent(id)}" aria-pressed="${on}">${on?'Selected':'Select this piece'}</button></div><div class="meta"><span>${labels[category]} · ${isTwo?escapeHtml(f.id):String(i+1).padStart(3,'0')}</span>${isTwo?'':`<small class="size">SIZE ${sizeOf(f.name)}</small>`}</div></article>`;
-      }).join(''):'<div class="empty">No pieces found.</div>';
+      document.querySelector('#introText').textContent=selectionOnly?'Review the exact pieces in this shared selection. This is a request only, not a booking.':shop==='shop1'?'Choose one kimono in advance for your hotel kimono experience. Please choose by size.':'Select three preferred kimonos in advance, then see and compare them in person at the Ginza shop before making your final choice.';
+      let ids;
+      if(selectionOnly)ids=[...selected];
+      else if(shop==='shop1')ids=[...shop1Keys].filter(([id,r])=>r.category===category&&(active==='ALL'||sizeOf(r.file.name)===active)).map(([id])=>id);
+      else ids=shop2Files.filter(f=>f.category===category).map(f=>`shop2:${f.id}`);
+      document.querySelector('#shownCount').textContent=selectionOnly?`${ids.length} selected pieces shown`:`${shop==='shop1'?'H':'K'} · ${ids.length} pieces shown`;
+      document.querySelector('#grid').innerHTML=ids.length?ids.map(id=>{
+        const isTwo=shop2Keys.has(id);const record=isTwo?shop2Keys.get(id):shop1Keys.get(id);const f=isTwo?record:record.file;const on=selected.has(id);const cat=record.category;
+        const alt=isTwo?`K ${labels[cat]} kimono ${f.id}`:`H ${cat} kimono piece, size ${sizeOf(f.name)}`;
+        return `<article class="item ${isTwo?'shop2-item ':''}${on?'selected':''}" data-piece-id="${escapeHtml(id)}"><div class="photo"><img loading="lazy" src="${escapeHtml(f.src)}" alt="${escapeHtml(alt)}"><button class="choose" data-id="${encodeURIComponent(id)}" aria-pressed="${on}">${on?'Selected — tap to remove':'Select this piece'}</button></div><div class="meta"><span>${isTwo?'K':'H'} · ${labels[cat]} · ${isTwo?escapeHtml(f.id):String(record.number).padStart(3,'0')}</span>${isTwo?'':`<small class="size">SIZE ${sizeOf(f.name)}</small>`}</div></article>`;
+      }).join(''):`<div class="empty">${escapeHtml(selectionError||'No pieces found.')}</div>`;
       updateShare();
     }
     [shareBtn,floatingShareBtn].forEach(b=>b.addEventListener('click',copySelectionLink));
-    document.querySelectorAll('[data-shop]').forEach(b=>b.addEventListener('click',()=>{shop=b.dataset.shop;category='standard';active='ALL';render();}));
+    document.querySelector('#viewFullCollection').addEventListener('click',()=>fullCollection());
+    document.querySelectorAll('[data-shop]').forEach(b=>b.addEventListener('click',()=>fullCollection(b.dataset.shop)));
     document.querySelectorAll('[data-collection]').forEach(b=>b.addEventListener('click',()=>{category=b.dataset.collection;active='ALL';render();}));
     document.querySelectorAll('[data-size]').forEach(b=>b.addEventListener('click',()=>{active=b.dataset.size;render();}));
-    document.querySelector('#grid').addEventListener('click',e=>{const b=e.target.closest('.choose');if(!b)return;const id=decodeURIComponent(b.dataset.id);selected.has(id)?selected.delete(id):selected.add(id);render();});
-    document.querySelector('#clear').addEventListener('click',()=>{selected.clear();render();});
-    window.addEventListener('hashchange',()=>{restoreSelection();render();});
+    document.querySelector('#grid').addEventListener('click',e=>{const b=e.target.closest('.choose');if(!b)return;const id=decodeURIComponent(b.dataset.id);selected.has(id)?selected.delete(id):selected.add(id);selectionChanged();});
+    document.querySelector('#clear').addEventListener('click',()=>{selected.clear();selectionChanged();});
+    window.addEventListener('hashchange',()=>{restoreSelection();document.querySelector('#generatedLinkPanel').hidden=true;render();});
     restoreSelection();render();
   </script>
 </body>
